@@ -1,0 +1,19 @@
+@charset "utf-8";
+// If need, change your variables before importing Bulma
+@import "./variables.scss";
+@import "../node_modules/bulma/sass/utilities/initial-variables.sass";
+$grey-dark: #363636;
+$link: $primary-blue-color;
+@import "../node_modules/bulma/bulma.sass";
+
+html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: $gray-bg;
+  min-height: 100vh;
+}

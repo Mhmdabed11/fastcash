@@ -1,0 +1,12 @@
+.register {
+  .register__container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px;
+
+    .register__container__title {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+  }
+}
