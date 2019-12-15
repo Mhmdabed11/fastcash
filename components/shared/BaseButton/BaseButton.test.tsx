@@ -4,13 +4,13 @@ import "@testing-library/jest-dom/extend-expect";
 import BaseButton from "./BaseButton";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-describe("Test Base Button", () => {
+describe("Test BaseButton", () => {
   test("Button text renders correctly", () => {
     const { getByRole } = render(<BaseButton>Login</BaseButton>);
     const button = getByRole("button");
     expect(button.innerHTML).toBe("Login");
   }),
-    test("Button text renders correctly along with left left icon and right icon", () => {
+    test("Button text renders correctly along with the left icon and right icon", () => {
       const { getByRole, queryByTestId } = render(
         <BaseButton iconLeft={faUser} iconRight={faUser}>
           Login
