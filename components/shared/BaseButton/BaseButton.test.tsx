@@ -1,0 +1,24 @@
+import * as React from "react";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import BaseButton from "./BaseButton";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+
+describe("Test Base Button", () => {
+  test("Button text renders correctly", () => {
+    const { getByRole } = render(<BaseButton>Login</BaseButton>);
+    const button = getByRole("button");
+    expect(button.innerHTML).toBe("Login");
+  }),
+    test("Button text renders correctly along with left left icon and right icon", () => {
+      const { getByRole, queryByTestId } = render(
+        <BaseButton iconLeft={faUser} iconRight={faUser}>
+          Login
+        </BaseButton>
+      );
+      const button = getByRole("button");
+      expect(queryByTestId(/icon-left/i)).not.toBeNull();
+      expect(queryByTestId(/icon-right/i)).not.toBeNull();
+      expect(button.innerHTML).toContain("Login");
+    });
+});

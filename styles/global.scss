@@ -16,4 +16,10 @@ body {
   overflow-x: hidden;
   background-color: $gray-bg;
   min-height: 100vh;
+  --error-text-color: #{$error-text};
+}
+
+.is-danger.input,
+.is-danger.textarea {
+  border-color: $error-text !important;
 }

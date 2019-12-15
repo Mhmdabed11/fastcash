@@ -1,12 +1,18 @@
-.register {
-  .register__container {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 24px;
+.register-section {
+  margin-top: 50px;
+  .register {
+    .register__container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px;
 
-    .register__container__title {
-      font-weight: 700;
-      font-size: 1.5rem;
+      .register__container__title {
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+      .register__container__controls {
+        margin-top: 30px;
+      }
     }
   }
 }

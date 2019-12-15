@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
@@ -23,8 +26,18 @@
     "react-dom": "16.12.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@types/jest": "^24.0.23",
     "@types/node": "^12.12.17",
     "@types/react": "^16.9.16",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.9.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
     "typescript": "^3.7.3"
   }
 }
