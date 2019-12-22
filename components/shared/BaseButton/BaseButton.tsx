@@ -13,7 +13,7 @@ type ButtonProps = {
   fullWidth?: boolean;
   rounded?: boolean;
   style?: object;
-  isLoading?: boolean;
+  loading?: boolean;
   disabled?: boolean;
   iconLeft?: IconProp;
   iconRight?: IconProp;
@@ -32,16 +32,16 @@ export default function Button({
   fullWidth,
   style,
   rounded,
-  isLoading,
+  loading,
   disabled = false,
   iconLeft,
   iconRight
 }: ButtonProps) {
   const sizeClassName = size ? sizeMapper[size] : "";
   const fullWidthClassName = fullWidth ? "is-fullwidth" : "";
-  const isLoadingClassName = isLoading ? "is-loading" : "";
+  const loadingClassName = loading ? "is-loading" : "";
   const isRoundedClassName = rounded ? "is-rounded" : "";
-  const className = `button ${sizeClassName} ${fullWidthClassName} ${isLoadingClassName} ${isRoundedClassName}`;
+  const className = `button ${sizeClassName} ${fullWidthClassName} ${loadingClassName} ${isRoundedClassName}`;
   const renderIconLeft = () =>
     iconLeft ? (
       <span data-testid="icon-left" className="icon is-large is-left">

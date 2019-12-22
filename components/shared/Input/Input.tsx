@@ -8,8 +8,11 @@ type InputProps = {
   iconRight?: IconProp;
   placeholder: string;
   type?: string;
-  id: string;
+  name: string;
   error?: string;
+  value: number | string;
+  onChange: (e) => void;
+  required: boolean;
 };
 
 export default function Input({
@@ -18,12 +21,15 @@ export default function Input({
   iconLeft,
   iconRight,
   type = "text",
-  id,
-  error
+  name,
+  error,
+  value,
+  onChange,
+  required = false
 }: InputProps) {
   const renderLabel = () =>
     label ? (
-      <label htmlFor={id} className="label">
+      <label htmlFor={name} className="label">
         {label}
       </label>
     ) : null;
@@ -57,10 +63,13 @@ export default function Input({
         } : ""`}
       >
         <input
-          id={id}
+          name={name}
           className={`input ${error ? "is-danger" : ""}`}
           type={type}
           placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          required={required}
         />
         {renderError()}
         {renderIconLeft()}
