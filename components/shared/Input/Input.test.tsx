@@ -13,10 +13,12 @@ describe("Test error element", () => {
   test("Error element renders when error prop is supplied", () => {
     const { queryByTestId } = render(
       <Input
-        id="firstName"
+        name="firstName"
         iconLeft={faUser}
         placeholder={"First Name"}
         error="Required"
+        value=""
+        onChange={e => {}}
       />
     );
 
@@ -25,7 +27,13 @@ describe("Test error element", () => {
 
   test("Error element doesn't render when error prop is not supplied", () => {
     const { queryByTestId } = render(
-      <Input id="firstName" iconLeft={faUser} placeholder={"First Name"} />
+      <Input
+        name="firstName"
+        iconLeft={faUser}
+        placeholder={"First Name"}
+        value=""
+        onChange={e => {}}
+      />
     );
     expect(queryByTestId(/error/i)).toBeNull();
   });

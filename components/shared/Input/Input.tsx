@@ -12,7 +12,7 @@ type InputProps = {
   error?: string;
   value: number | string;
   onChange: (e) => void;
-  required: boolean;
+  required?: boolean;
 };
 
 export default function Input({
@@ -36,7 +36,7 @@ export default function Input({
 
   const renderIconLeft = () =>
     iconLeft ? (
-      <span className="icon is-large is-left">
+      <span className="icon is-medium is-left">
         <FontAwesomeIcon icon={iconLeft} />
       </span>
     ) : null;

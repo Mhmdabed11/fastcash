@@ -9,6 +9,7 @@ import {
 import PrimaryButton from "../shared/PrimaryButton/PrimaryButton";
 import { useFormValidation } from "../../utils/hooks/useFormValidation";
 import { validationSchema } from "./validation";
+import Select from "../shared/Select/Select";
 
 type formProps = {
   onSubmit: (values: object) => void;
@@ -72,7 +73,6 @@ export default function SignupForm({ onSubmit, submitting }: formProps) {
             error={
               values.firstName.errorLabel ? values.firstName.errorLabel : null
             }
-            required={false}
           />
         </div>
 
@@ -86,7 +86,6 @@ export default function SignupForm({ onSubmit, submitting }: formProps) {
             error={
               values.lastName.errorLabel ? values.lastName.errorLabel : null
             }
-            required={false}
           />
         </div>
         <div className="column is-full">
@@ -98,18 +97,17 @@ export default function SignupForm({ onSubmit, submitting }: formProps) {
             value={values.email.value}
             onChange={onChange}
             error={values.email.errorLabel ? values.email.errorLabel : null}
-            required={false}
           />
         </div>
         <div className="column is-full">
-          <Input
-            name="country"
+          <Select
             iconLeft={faGlobe}
-            placeholder={"Country"}
+            options={["Lebanon", "Canada"]}
+            name="country"
             value={values.country.value}
             onChange={onChange}
             error={values.country.errorLabel ? values.country.errorLabel : null}
-            required={false}
+            placeholder="Country"
           />
         </div>
         <div className="column is-full">
@@ -123,7 +121,6 @@ export default function SignupForm({ onSubmit, submitting }: formProps) {
             error={
               values.password.errorLabel ? values.password.errorLabel : null
             }
-            required={false}
           />
         </div>
         <div className="column is-full">
@@ -139,7 +136,6 @@ export default function SignupForm({ onSubmit, submitting }: formProps) {
                 ? values.confirmPassword.errorLabel
                 : null
             }
-            required={false}
           />
         </div>
       </div>

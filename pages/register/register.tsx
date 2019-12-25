@@ -35,12 +35,14 @@ export const SIGNUP_MUTATION = gql`
 
 export default function Register() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [signUp, { data }] = useMutation(SIGNUP_MUTATION, {
+  const [signUp] = useMutation(SIGNUP_MUTATION, {
     onCompleted: data => {
-      console.log(data);
       setIsSubmitting(false);
     },
-    onError: err => setIsSubmitting(false)
+    onError: err => {
+      console.log(err);
+      setIsSubmitting(false);
+    }
   });
 
   const handleSubmit = ({

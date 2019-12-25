@@ -2,19 +2,19 @@ export const validationSchema: object = {
   firstName: {
     presence: {
       allowEmpty: false,
-      message: "^This is required"
+      message: "^First name is required"
     }
   },
   lastName: {
     presence: {
       allowEmpty: false,
-      message: "^This is required"
+      message: "^Last name is required"
     }
   },
   email: {
     presence: {
       allowEmpty: false,
-      message: "^This is required"
+      message: "^Email is required"
     },
     email: {
       message: "^Must be a valid email"
@@ -23,19 +23,19 @@ export const validationSchema: object = {
   country: {
     presence: {
       allowEmpty: false,
-      message: "^This is required"
+      message: "^Country is required"
     }
   },
   password: {
     presence: {
       allowEmpty: false,
-      message: "^This is required"
+      message: "^Password is required"
     }
   },
   confirmPassword: {
     presence: {
       allowEmpty: false,
-      message: "^This is required"
+      message: "^Password confirmation is required"
     }
   }
 };
