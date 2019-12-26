@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import "./register.scss";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
@@ -45,14 +45,16 @@ export default function Register() {
     onError: err => {
       setIsSubmitting(false);
       let errors = [];
-      err.graphQLErrors.forEach(err => errors.push(err.message));
+      err.graphQLErrors.forEach(err => errors.push(err.message.split(":")[1]));
       setError(errors);
     }
   });
 
   // render error messages
   const renderErrorMessages = () => {
-    return error.map(err => <Message type="danger" message={err} />);
+    return error.map((err, index) => (
+      <Message key={index} type="danger" message={err} />
+    ));
   };
 
   const handleSubmit = ({
@@ -63,8 +65,11 @@ export default function Register() {
     password,
     confirmPassword
   }) => {
+    if (password !== confirmPassword) {
+      setError(["Passwords do not match"]);
+      return;
+    }
     setIsSubmitting(true);
-    setError([]);
     signUp({
       variables: {
         firstName,
@@ -82,7 +87,7 @@ export default function Register() {
         <div className="register">
           <div className="register__container has-background-white">
             {renderErrorMessages()}
-            <div className="register__container__title">Sign Up</div>
+            <div className="register__container__title">Sign up</div>
             <div className="register__container__controls">
               <SignupForm onSubmit={handleSubmit} submitting={isSubmitting} />
             </div>

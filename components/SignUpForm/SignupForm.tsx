@@ -1,15 +1,17 @@
-import React from "react";
+import * as React from "react";
 import Input from "../shared/Input/Input";
 import {
   faUser,
   faEnvelope,
   faGlobe,
-  faLock
+  faLock,
+  faCalendarPlus
 } from "@fortawesome/free-solid-svg-icons";
 import PrimaryButton from "../shared/PrimaryButton/PrimaryButton";
 import { useFormValidation } from "../../utils/hooks/useFormValidation";
 import { validationSchema } from "./validation";
 import Select from "../shared/Select/Select";
+import { setServers } from "dns";
 
 type formProps = {
   onSubmit: (values: object) => void;
@@ -38,7 +40,7 @@ const initialValues = {
   }
 };
 export default function SignupForm({ onSubmit, submitting }: formProps) {
-  const { values, onChange, handleFormSubmit } = useFormValidation(
+  const { values, onChange, handleFormSubmit, setValues } = useFormValidation(
     initialValues,
     validationSchema
   );
@@ -61,7 +63,7 @@ export default function SignupForm({ onSubmit, submitting }: formProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
+    <form onSubmit={handleSubmit} autoComplete="off" data-testid="signup-form">
       <div className="columns is-multiline">
         <div className="column is-half-fullhd">
           <Input
