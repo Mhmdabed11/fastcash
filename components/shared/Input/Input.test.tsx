@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  render,
-  fireEvent,
-  waitForElement,
-  getByTestId
-} from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Input from "./Input";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
