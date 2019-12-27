@@ -4,6 +4,7 @@
 @import "../node_modules/bulma/sass/utilities/initial-variables.sass";
 $grey-dark: #363636;
 $link: $primary-blue-color;
+
 @import "../node_modules/bulma/bulma.sass";
 
 html {
@@ -17,6 +18,8 @@ body {
   background-color: $gray-bg;
   min-height: 100vh;
   --error-text-color: #{$error-text};
+  --margin-top-from-logo: #{$margin-top-from-logo};
+  --light-gray: #{$light-gray};
 }
 
 .is-danger.input,

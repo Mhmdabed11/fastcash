@@ -1,11 +1,11 @@
 import * as React from "react";
-import BaseButton from "../BaseButton/BaseButton";
+import BaseAnchor from "../BaseAnchor/BaseAnchor";
 const PRIMARY_COLOR = "#2062f0";
 const WHITE = "#FFFFFF";
-export default function PrimaryButton({ children, onClick, ...rest }) {
+export default function PrimaryAnchor({ children, to, ...rest }) {
   return (
-    <BaseButton
-      onClick={onClick}
+    <BaseAnchor
+      to={to}
       {...rest}
       style={{
         backgroundColor: PRIMARY_COLOR,
@@ -15,6 +15,6 @@ export default function PrimaryButton({ children, onClick, ...rest }) {
       }}
     >
       {children}
-    </BaseButton>
+    </BaseAnchor>
   );
 }

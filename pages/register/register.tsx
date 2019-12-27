@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import SignupForm from "../../components/SignUpForm/SignupForm";
 import Message from "../../components/shared/Message/Message";
-
+import Router from "next/router";
 export const SIGNUP_MUTATION = gql`
   mutation UserMutation(
     $firstName: String!
@@ -39,8 +39,8 @@ export default function Register() {
   const [error, setError] = React.useState([]);
   const [signUp] = useMutation(SIGNUP_MUTATION, {
     onCompleted: data => {
-      console.log(data);
-      setIsSubmitting(false);
+      const email = data.signup.user.email;
+      Router.push(`/verify/${email}`);
     },
     onError: err => {
       setIsSubmitting(false);
@@ -49,6 +49,11 @@ export default function Register() {
       setError(errors);
     }
   });
+
+  // cleanup on unmount
+  React.useEffect(() => {
+    return () => setIsSubmitting(false);
+  }, []);
 
   // render error messages
   const renderErrorMessages = () => {
@@ -85,6 +90,9 @@ export default function Register() {
     <section className="register-section">
       <div className="container">
         <div className="register">
+          <div className="has-text-centered">
+            <img src="/fastcashlogo.svg" alt="fastcash_logo" />
+          </div>
           <div className="register__container has-background-white">
             {renderErrorMessages()}
             <div className="register__container__title">Sign up</div>

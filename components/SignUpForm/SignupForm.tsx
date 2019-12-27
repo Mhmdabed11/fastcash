@@ -141,7 +141,12 @@ export default function SignupForm({ onSubmit, submitting }: formProps) {
           />
         </div>
       </div>
-      <PrimaryButton type="submit" fullWidth loading={submitting}>
+      <PrimaryButton
+        type="submit"
+        fullWidth
+        loading={submitting}
+        onClick={() => {}}
+      >
         Register
       </PrimaryButton>
     </form>

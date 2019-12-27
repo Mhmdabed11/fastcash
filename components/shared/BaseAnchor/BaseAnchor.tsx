@@ -1,15 +1,15 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-enum ButtonSizes {
+import Link from "next/link";
+enum AnchorSizes {
   small,
   medium,
   large
 }
-type ButtonProps = {
+type AnchorProps = {
   children: React.ReactNode;
-  onClick: () => void;
-  size?: ButtonSizes;
+  size?: AnchorSizes;
   fullWidth?: boolean;
   rounded?: boolean;
   style?: object;
@@ -17,6 +17,7 @@ type ButtonProps = {
   disabled?: boolean;
   iconLeft?: IconProp;
   iconRight?: IconProp;
+  to: string;
 };
 
 const sizeMapper = {
@@ -25,9 +26,8 @@ const sizeMapper = {
   large: "is-large"
 };
 
-export default function Button({
+export default function BaseAnchor({
   children,
-  onClick,
   size,
   fullWidth,
   style,
@@ -35,8 +35,9 @@ export default function Button({
   loading,
   disabled = false,
   iconLeft,
-  iconRight
-}: ButtonProps) {
+  iconRight,
+  to
+}: AnchorProps) {
   const sizeClassName = size ? sizeMapper[size] : "";
   const fullWidthClassName = fullWidth ? "is-fullwidth" : "";
   const loadingClassName = loading ? "is-loading" : "";
@@ -64,15 +65,12 @@ export default function Button({
     );
 
   return (
-    <button
-      className={className}
-      style={style}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {renderIconLeft()}
-      {renderChildren()}
-      {renderIconRight()}
-    </button>
+    <Link href={to}>
+      <a className={className} style={style}>
+        {renderIconLeft()}
+        {renderChildren()}
+        {renderIconRight()}
+      </a>
+    </Link>
   );
 }

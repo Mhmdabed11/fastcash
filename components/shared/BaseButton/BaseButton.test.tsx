@@ -6,13 +6,15 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 describe("Test BaseButton", () => {
   test("Button text renders correctly", () => {
-    const { getByRole } = render(<BaseButton>Login</BaseButton>);
+    const { getByRole } = render(
+      <BaseButton onClick={() => {}}>Login</BaseButton>
+    );
     const button = getByRole("button");
     expect(button.innerHTML).toBe("Login");
   }),
     test("Button text renders correctly along with the left icon and right icon", () => {
       const { getByRole, queryByTestId } = render(
-        <BaseButton iconLeft={faUser} iconRight={faUser}>
+        <BaseButton onClick={() => {}} iconLeft={faUser} iconRight={faUser}>
           Login
         </BaseButton>
       );
