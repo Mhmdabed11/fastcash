@@ -1,18 +1,18 @@
 $margin-top-from-logo: var(--margin-top-from-logo);
-.register-section {
+.login-section {
   margin-top: 50px;
-  .register {
-    .register__container {
+  .login {
+    .login__container {
       max-width: 480px;
       margin: 0 auto;
       padding: 24px;
       margin-top: $margin-top-from-logo;
 
-      .register__container-title {
+      .login__container-title {
         font-weight: 700;
         font-size: 1.5rem;
       }
-      .register__container-controls {
+      .login__container-controls {
         margin-top: 30px;
       }
     }

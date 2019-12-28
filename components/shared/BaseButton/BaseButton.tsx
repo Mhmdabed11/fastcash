@@ -6,7 +6,7 @@ enum ButtonSizes {
   medium,
   large
 }
-type ButtonProps = {
+export type ButtonProps = {
   children: React.ReactNode;
   onClick: () => void;
   size?: ButtonSizes;
@@ -17,6 +17,7 @@ type ButtonProps = {
   disabled?: boolean;
   iconLeft?: IconProp;
   iconRight?: IconProp;
+  type?: "button" | "submit" | "reset";
 };
 
 const sizeMapper = {
@@ -35,7 +36,8 @@ export default function Button({
   loading,
   disabled = false,
   iconLeft,
-  iconRight
+  iconRight,
+  type
 }: ButtonProps) {
   const sizeClassName = size ? sizeMapper[size] : "";
   const fullWidthClassName = fullWidth ? "is-fullwidth" : "";
@@ -69,6 +71,7 @@ export default function Button({
       style={style}
       onClick={onClick}
       disabled={disabled}
+      type={type}
     >
       {renderIconLeft()}
       {renderChildren()}

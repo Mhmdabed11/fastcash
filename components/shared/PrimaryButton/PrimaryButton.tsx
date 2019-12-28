@@ -2,7 +2,12 @@ import * as React from "react";
 import BaseButton from "../BaseButton/BaseButton";
 const PRIMARY_COLOR = "#2062f0";
 const WHITE = "#FFFFFF";
-export default function PrimaryButton({ children, onClick, ...rest }) {
+import { ButtonProps } from "../BaseButton/BaseButton";
+export default function PrimaryButton({
+  children,
+  onClick,
+  ...rest
+}: ButtonProps) {
   return (
     <BaseButton
       onClick={onClick}

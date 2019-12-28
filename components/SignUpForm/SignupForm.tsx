@@ -4,8 +4,7 @@ import {
   faUser,
   faEnvelope,
   faGlobe,
-  faLock,
-  faCalendarPlus
+  faLock
 } from "@fortawesome/free-solid-svg-icons";
 import PrimaryButton from "../shared/PrimaryButton/PrimaryButton";
 import { useFormValidation } from "../../utils/hooks/useFormValidation";
@@ -13,7 +12,7 @@ import { validationSchema } from "./validation";
 import Select from "../shared/Select/Select";
 import { setServers } from "dns";
 
-type formProps = {
+type FormProps = {
   onSubmit: (values: object) => void;
   submitting: boolean;
 };
@@ -39,8 +38,8 @@ const initialValues = {
     value: ""
   }
 };
-export default function SignupForm({ onSubmit, submitting }: formProps) {
-  const { values, onChange, handleFormSubmit, setValues } = useFormValidation(
+export default function SignupForm({ onSubmit, submitting }: FormProps) {
+  const { values, onChange, handleFormSubmit } = useFormValidation(
     initialValues,
     validationSchema
   );

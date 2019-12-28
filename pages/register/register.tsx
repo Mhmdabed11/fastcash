@@ -95,8 +95,8 @@ export default function Register() {
           </div>
           <div className="register__container has-background-white">
             {renderErrorMessages()}
-            <div className="register__container__title">Sign up</div>
-            <div className="register__container__controls">
+            <div className="register__container-title">Sign up</div>
+            <div className="register__container-controls">
               <SignupForm onSubmit={handleSubmit} submitting={isSubmitting} />
             </div>
           </div>
