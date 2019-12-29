@@ -8,7 +8,7 @@ enum ButtonSizes {
 }
 export type ButtonProps = {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   size?: ButtonSizes;
   fullWidth?: boolean;
   rounded?: boolean;

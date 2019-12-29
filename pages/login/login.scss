@@ -15,6 +15,15 @@ $margin-top-from-logo: var(--margin-top-from-logo);
       .login__container-controls {
         margin-top: 30px;
       }
+      .login__container-forget-pass {
+        margin-top: 20px;
+      }
+      .login__container-create-account {
+        margin-top: 40px;
+        a {
+          font-weight: 500;
+        }
+      }
     }
   }
 }

@@ -10,7 +10,6 @@ import PrimaryButton from "../shared/PrimaryButton/PrimaryButton";
 import { useFormValidation } from "../../utils/hooks/useFormValidation";
 import { validationSchema } from "./validation";
 import Select from "../shared/Select/Select";
-import { setServers } from "dns";
 
 type FormProps = {
   onSubmit: (values: object) => void;

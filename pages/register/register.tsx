@@ -5,6 +5,8 @@ import { useMutation } from "@apollo/react-hooks";
 import SignupForm from "../../components/SignUpForm/SignupForm";
 import Message from "../../components/shared/Message/Message";
 import Router from "next/router";
+import Link from "next/link";
+
 export const SIGNUP_MUTATION = gql`
   mutation UserMutation(
     $firstName: String!
@@ -91,13 +93,37 @@ export default function Register() {
       <div className="container">
         <div className="register">
           <div className="has-text-centered">
-            <img src="/fastcashlogo.svg" alt="fastcash_logo" />
+            <a href="http://192.168.99.100:3000">
+              <img src="./fastcashlogo.svg" alt="fastcash_logo" />
+            </a>
           </div>
           <div className="register__container has-background-white">
             {renderErrorMessages()}
             <div className="register__container-title">Sign up</div>
             <div className="register__container-controls">
               <SignupForm onSubmit={handleSubmit} submitting={isSubmitting} />
+            </div>
+            <div className="register__container-sign-in has-text-centered">
+              Already have an account ?
+              <Link href="/login">
+                <a className="is-link">&nbsp;Login</a>
+              </Link>
+            </div>
+            <hr />
+            <div className="register__container-terms">
+              By creating an account, you agree to FastCash's
+              <Link href="#">
+                <a className="is-link"> Terms of Service</a>
+              </Link>
+              ,&nbsp;
+              <Link href="#">
+                <a className="is-link">Cookie Policy&nbsp;</a>
+              </Link>
+              and
+              <Link href="#">
+                <a className="is-link">&nbsp;Privacy Policy</a>
+              </Link>
+              .
             </div>
           </div>
         </div>

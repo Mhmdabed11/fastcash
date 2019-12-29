@@ -21,14 +21,34 @@ const initialValues = {
   }
 };
 
-export default function LoginForm() {
+export default function LoginForm({ onSubmit, submitting }: FormProps) {
   const { values, handleFormSubmit, onChange } = useFormValidation(
     initialValues,
     validationSchema
   );
 
+  // handle submit
+  const handleSubmit = e => {
+    e.preventDefault();
+    handleFormSubmit(handleSignIn);
+  };
+
+  // handle sign in
+  const handleSignIn = () => {
+    const formValues: object = {
+      email: values.email.value,
+      password: values.password.value
+    };
+    onSubmit(formValues);
+  };
+
   return (
-    <form data-testid="login-form">
+    <form
+      onSubmit={handleSubmit}
+      autoComplete="off"
+      autoSave="off"
+      data-testid="login-form"
+    >
       <div className="columns is-multiline">
         <div className="column is-full">
           <Input
@@ -51,7 +71,7 @@ export default function LoginForm() {
         </div>
 
         <div className="column is-full">
-          <PrimaryButton type="submit" fullWidth onClick={() => {}}>
+          <PrimaryButton type="submit" fullWidth loading={submitting}>
             Login
           </PrimaryButton>
         </div>

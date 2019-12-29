@@ -45,6 +45,21 @@ export default function Verify({ email }: VerifyProps) {
       variables: { email }
     });
   };
+
+  // render success message
+  const renderSuccessMessage = () => {
+    return success ? (
+      <Message
+        type="success"
+        message="An activation email has been sent. Please check your inbox"
+      />
+    ) : null;
+  };
+
+  // render error message
+  const renderErrorMessage = () =>
+    error ? <Message type="danger" message={error} /> : null;
+
   return (
     <section className="verify-section">
       <div className="container">
@@ -53,13 +68,8 @@ export default function Verify({ email }: VerifyProps) {
             <img src="/fastcashlogo.svg" alt="fastcash_logo" />
           </div>
           <div className="verify__container has-background-white">
-            {success ? (
-              <Message
-                type="success"
-                message="An activation email has been sent. Please check your inbox"
-              />
-            ) : null}
-            {error ? <Message type="danger" message={error} /> : null}
+            {renderSuccessMessage()}
+            {renderErrorMessage()}
             <div className="verify__container-heading has-text-centered">
               Just one more step...
             </div>

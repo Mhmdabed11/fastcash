@@ -20,9 +20,19 @@ body {
   --error-text-color: #{$error-text};
   --margin-top-from-logo: #{$margin-top-from-logo};
   --light-gray: #{$light-gray};
+  --navbar-item-color: #{$navbar-item-color};
 }
 
 .is-danger.input,
 .is-danger.textarea {
   border-color: $error-text !important;
+}
+
+.is-link {
+  color: $link-color;
+}
+
+.navbar-item {
+  font-size: 0.875rem;
+  font-weight: 400;
 }

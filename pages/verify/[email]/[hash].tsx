@@ -106,6 +106,22 @@ export default function Success({ email, hash }) {
     );
   };
 
+  // render success message
+  const renderSuccessMessage = () => {
+    return success ? (
+      <Message
+        type="success"
+        message="An activation email has been sent. Please check your inbox"
+      />
+    ) : null;
+  };
+
+  // render Error Message
+  const renderErrorMessage = () => {
+    return error ? <Message type="danger" message={error} /> : null;
+  };
+
+  // render Loading Body
   const renderBody = () => {
     if (loading) {
       return (
@@ -114,6 +130,7 @@ export default function Success({ email, hash }) {
         </div>
       );
     }
+
     return (
       <>
         <div className="success__container-sign has-text-centered">
@@ -134,13 +151,8 @@ export default function Success({ email, hash }) {
       <div className="container">
         <div className="success">
           <div className="success__container has-background-white">
-            {error ? <Message type="danger" message={error} /> : null}
-            {success ? (
-              <Message
-                type="success"
-                message="An activation email has been sent. Please check your inbox"
-              />
-            ) : null}
+            {renderErrorMessage()}
+            {renderSuccessMessage()}
             {renderBody()}
           </div>
         </div>

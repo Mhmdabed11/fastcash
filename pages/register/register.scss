@@ -15,6 +15,15 @@ $margin-top-from-logo: var(--margin-top-from-logo);
       .register__container-controls {
         margin-top: 30px;
       }
+      .register__container-sign-in {
+        margin-top: 40px;
+        a {
+          font-weight: 500;
+        }
+      }
+      hr {
+        margin: 40px 0;
+      }
     }
   }
 }
