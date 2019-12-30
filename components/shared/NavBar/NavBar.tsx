@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Link from "next/link";
 import {
   faSearch,
@@ -30,15 +30,17 @@ export default function NavBar({ authenticated }: NavBarProps) {
     return (
       <>
         <Link href="/">
-          <a className="navbar-item">
+          <a className="navbar-item" data-testid="postJobAuthSection">
             <FontAwesomeIcon icon={faShoppingBag} /> &nbsp; Post a job
           </a>
         </Link>
-        <div className="navbar-item has-dropdown is-hoverable">
+        <div
+          className="navbar-item has-dropdown is-hoverable"
+          data-testid="profileAuthSection"
+        >
           <a className="navbar-link is-arrowless">
             <FontAwesomeIcon icon={faUser} /> &nbsp; Mohammad Abed
           </a>
-
           <div className="navbar-dropdown">
             <a className="navbar-item">Profile</a>
             <hr className="navbar-divider" />
@@ -57,7 +59,7 @@ export default function NavBar({ authenticated }: NavBarProps) {
       return null;
     }
     return (
-      <div className="navbar-item">
+      <div data-testid="nonAuthSection" className="navbar-item">
         <div className="buttons">
           <PrimaryAnchor to="/register">Sign up</PrimaryAnchor>
           <LightAnchor to="/login">Login</LightAnchor>
@@ -94,7 +96,7 @@ export default function NavBar({ authenticated }: NavBarProps) {
         </div>
 
         <div
-          id="navbarBasicExample"
+          id="navbar"
           className={`navbar-menu ${isActive ? "is-active" : ""}`}
         >
           <div className="navbar-start">
