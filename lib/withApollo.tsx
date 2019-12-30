@@ -146,20 +146,10 @@ const httpLink = new HttpLink({
  * @param  {Object} [initialState={}]
  */
 function createApolloClient(initialState = {}) {
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-        )
-      );
-    if (networkError) console.log(`[Network error]: ${networkError}`);
-  });
-
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
     ssrMode: typeof window === "undefined", // Disables forceFetch on the server (so queries are only run once)
-    link: errorLink.concat(authLink.concat(httpLink)),
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache().restore(initialState)
   });
 }

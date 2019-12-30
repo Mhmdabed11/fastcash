@@ -99,5 +99,5 @@ export default function Verify({ email }: VerifyProps) {
 
 Verify.getInitialProps = async ({ req, query }) => {
   const email = query && query.email;
-  return { email };
+  return { email, hello: 123 };
 };

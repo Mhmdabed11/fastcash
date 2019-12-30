@@ -161,7 +161,7 @@ export default function Success({ email, hash }) {
   );
 }
 
-Success.getInitialProps = ({ req, query }) => {
+Success.getInitialProps = async ({ req, query }) => {
   const email = query && query.email;
   const hash = query && query.hash;
   return { email, hash };
