@@ -136,7 +136,7 @@ const authLink = setContext((_, { headers }) => {
 
 //http
 const httpLink = new HttpLink({
-  uri: "http://192.168.99.100:4000", // Server URL (must be absolute)
+  uri: "http://localhost:4000", // Server URL (must be absolute)
   credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
   fetch
 });

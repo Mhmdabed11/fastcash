@@ -95,7 +95,7 @@ function Register(props) {
       <div className="container">
         <div className="register">
           <div className="has-text-centered">
-            <a href="http://192.168.99.100:3000">
+            <a href="http://localhost:3000">
               <img src="./fastcashlogo.svg" alt="fastcash_logo" />
             </a>
           </div>
