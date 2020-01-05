@@ -6,6 +6,7 @@ import { ButtonProps } from "../BaseButton/BaseButton";
 export default function PrimaryButton({
   children,
   onClick,
+  style,
   ...rest
 }: ButtonProps) {
   return (
@@ -16,7 +17,8 @@ export default function PrimaryButton({
         backgroundColor: PRIMARY_COLOR,
         color: WHITE,
         fontWeight: "normal",
-        height: "50px"
+        height: "50px",
+        ...style
       }}
     >
       {children}

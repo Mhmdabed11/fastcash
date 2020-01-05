@@ -7,9 +7,9 @@ enum AnchorSizes {
   medium,
   large
 }
-type AnchorProps = {
+export type AnchorProps = {
   children: React.ReactNode;
-  size?: AnchorSizes;
+  size?: "small" | "medium" | "large";
   fullWidth?: boolean;
   rounded?: boolean;
   style?: object;
@@ -18,12 +18,6 @@ type AnchorProps = {
   iconLeft?: IconProp;
   iconRight?: IconProp;
   to: string;
-};
-
-const sizeMapper = {
-  small: "is-small",
-  medium: "is-medium",
-  large: "is-large"
 };
 
 export default function BaseAnchor({
@@ -38,7 +32,7 @@ export default function BaseAnchor({
   iconRight,
   to
 }: AnchorProps) {
-  const sizeClassName = size ? sizeMapper[size] : "";
+  const sizeClassName = size ? `is-${size}` : "";
   const fullWidthClassName = fullWidth ? "is-fullwidth" : "";
   const loadingClassName = loading ? "is-loading" : "";
   const isRoundedClassName = rounded ? "is-rounded" : "";

@@ -9,7 +9,7 @@ enum ButtonSizes {
 export type ButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;
-  size?: ButtonSizes;
+  size?: "small" | "medium" | "large";
   fullWidth?: boolean;
   rounded?: boolean;
   style?: object;
@@ -18,12 +18,6 @@ export type ButtonProps = {
   iconLeft?: IconProp;
   iconRight?: IconProp;
   type?: "button" | "submit" | "reset";
-};
-
-const sizeMapper = {
-  small: "is-small",
-  medium: "is-medium",
-  large: "is-large"
 };
 
 export default function Button({
@@ -39,7 +33,7 @@ export default function Button({
   iconRight,
   type
 }: ButtonProps) {
-  const sizeClassName = size ? sizeMapper[size] : "";
+  const sizeClassName = size ? `is-${size}` : "";
   const fullWidthClassName = fullWidth ? "is-fullwidth" : "";
   const loadingClassName = loading ? "is-loading" : "";
   const isRoundedClassName = rounded ? "is-rounded" : "";

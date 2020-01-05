@@ -2,7 +2,7 @@ import * as React from "react";
 import BaseAnchor from "../BaseAnchor/BaseAnchor";
 const LIGHT_COLOR = "whitesmoke";
 const BLACK = "#363636";
-export default function PrimaryAnchor({ children, to, ...rest }) {
+export default function LightAnchor({ children, to, ...rest }) {
   return (
     <BaseAnchor
       to={to}

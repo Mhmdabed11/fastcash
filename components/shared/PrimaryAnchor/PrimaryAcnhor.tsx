@@ -1,8 +1,13 @@
 import * as React from "react";
-import BaseAnchor from "../BaseAnchor/BaseAnchor";
+import BaseAnchor, { AnchorProps } from "../BaseAnchor/BaseAnchor";
 const PRIMARY_COLOR = "#2062f0";
 const WHITE = "#FFFFFF";
-export default function PrimaryAnchor({ children, to, ...rest }) {
+export default function PrimaryAnchor({
+  children,
+  to,
+  style,
+  ...rest
+}: AnchorProps) {
   return (
     <BaseAnchor
       to={to}
@@ -10,7 +15,8 @@ export default function PrimaryAnchor({ children, to, ...rest }) {
       style={{
         backgroundColor: PRIMARY_COLOR,
         color: WHITE,
-        fontWeight: "normal"
+        fontWeight: "normal",
+        ...style
       }}
     >
       {children}
