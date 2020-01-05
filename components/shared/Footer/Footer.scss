@@ -1,0 +1,32 @@
+.fc-footer {
+  background-color: var(--footer-bg-color);
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  .footer-bg {
+    background-image: url("/footerbg.svg");
+    height: 146px;
+    margin-top: 37px;
+  }
+  .footer__container {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .footer__container-logo {
+      padding: 1rem;
+    }
+
+    .footer-items {
+      padding: 1rem;
+
+      li {
+        color: white;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import NavBar from "../components/shared/NavBar/NavBar";
 import nextCookie from "next-cookies";
+import Footer from "../components/shared/Footer/Footer";
 
 type HomeProps = {
   authenticated: boolean;
@@ -14,6 +15,7 @@ const Home = ({ authenticated }: HomeProps) => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <NavBar authenticated={authenticated} />
+    <Footer />
   </div>
 );
 

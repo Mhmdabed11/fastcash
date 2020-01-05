@@ -11,6 +11,7 @@ html {
   margin: 0;
   padding: 0;
 }
+
 body {
   margin: 0;
   padding: 0;
@@ -21,6 +22,7 @@ body {
   --margin-top-from-logo: #{$margin-top-from-logo};
   --light-gray: #{$light-gray};
   --navbar-item-color: #{$navbar-item-color};
+  --footer-bg-color: #{$footer-bg-color};
 }
 
 .is-danger.input,
