@@ -5,11 +5,11 @@ import nextCookie from "next-cookies";
 import Footer from "../components/shared/Footer/Footer";
 import HomePageSearchHeader from "../components/HomePageSearchHeader/HomePageSearchHeader";
 import LatestPosts from "../components/LatestPosts/LatestPosts";
-import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-
+import { Query } from "react-apollo";
 type HomeProps = {
   authenticated: boolean;
+  context: any;
 };
 
 const GET_LATEST_POSTS = gql`
@@ -28,10 +28,7 @@ const GET_LATEST_POSTS = gql`
   }
 `;
 
-const Home = ({ authenticated }: HomeProps) => {
-  const { loading, error, data } = useQuery(GET_LATEST_POSTS);
-
-  console.log(data);
+const Home = ({ authenticated, context }: HomeProps) => {
   return (
     <div>
       <Head>
@@ -40,11 +37,12 @@ const Home = ({ authenticated }: HomeProps) => {
       </Head>
       <NavBar authenticated={authenticated} />
       <HomePageSearchHeader />
-      {loading ? (
-        <h1 className="title">LOADING</h1>
-      ) : (
-        <LatestPosts posts={(data && data.posts) || []} />
-      )}
+      <Query query={GET_LATEST_POSTS}>
+        {({ loading, error, data }) => {
+          if (loading) return <div>Loading...</div>;
+          return <LatestPosts posts={(data && data.posts) || []} />;
+        }}
+      </Query>
       <Footer />
     </div>
   );
