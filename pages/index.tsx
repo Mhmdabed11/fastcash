@@ -6,15 +6,16 @@ import Footer from "../components/shared/Footer/Footer";
 import HomePageSearchHeader from "../components/HomePageSearchHeader/HomePageSearchHeader";
 import LatestPosts from "../components/LatestPosts/LatestPosts";
 import gql from "graphql-tag";
-import { Query } from "react-apollo";
+import { useQuery } from "react-apollo";
 type HomeProps = {
   authenticated: boolean;
   context: any;
+  token: string;
 };
 
 const GET_LATEST_POSTS = gql`
   query getLatestPosts {
-    posts {
+    posts(first: 5) {
       id
       title
       location
@@ -28,7 +29,8 @@ const GET_LATEST_POSTS = gql`
   }
 `;
 
-const Home = ({ authenticated, context }: HomeProps) => {
+const Home = ({ authenticated, context, token }: HomeProps) => {
+  const { loading, error, data } = useQuery(GET_LATEST_POSTS, {});
   return (
     <div>
       <Head>
@@ -37,12 +39,7 @@ const Home = ({ authenticated, context }: HomeProps) => {
       </Head>
       <NavBar authenticated={authenticated} />
       <HomePageSearchHeader />
-      <Query query={GET_LATEST_POSTS}>
-        {({ loading, error, data }) => {
-          if (loading) return <div>Loading...</div>;
-          return <LatestPosts posts={(data && data.posts) || []} />;
-        }}
-      </Query>
+      <LatestPosts posts={(data && data.posts) || []} />;
       <Footer />
     </div>
   );
@@ -51,7 +48,7 @@ const Home = ({ authenticated, context }: HomeProps) => {
 Home.getInitialProps = async ctx => {
   const { token } = nextCookie(ctx);
   const authenticated = token;
-  return { authenticated };
+  return { authenticated, token };
 };
 
 export default Home;
