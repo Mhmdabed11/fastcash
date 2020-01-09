@@ -65,9 +65,6 @@ function Login() {
       <div className="container">
         <div className="login">
           <div className="has-text-centered">
-            <Link href="/">
-              <a>HOME</a>
-            </Link>
             <a href="http://localhost:3000">
               <img src="./fastcashlogo.svg" alt="fastcash_logo" />
             </a>
