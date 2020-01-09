@@ -7,6 +7,7 @@ import Message from "../../components/shared/Message/Message";
 import Router from "next/router";
 import Link from "next/link";
 import cookie from "js-cookie";
+import nextCookie from "next-cookies";
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($email: String!, $password: String!) {
@@ -64,7 +65,10 @@ function Login() {
       <div className="container">
         <div className="login">
           <div className="has-text-centered">
-            <a href="http://192.168.99.100:3000">
+            <Link href="/">
+              <a>HOME</a>
+            </Link>
+            <a href="http://localhost:3000">
               <img src="./fastcashlogo.svg" alt="fastcash_logo" />
             </a>
           </div>

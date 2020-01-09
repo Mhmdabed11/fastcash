@@ -16,13 +16,13 @@
         outline: none;
       }
     }
-    flex-basis: 80%;
+    flex: 1;
   }
   .search-input__search {
-    flex-basis: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 8px;
   }
   &:after {
     content: "";
@@ -76,10 +76,9 @@
       &:focus-within:after {
         width: 100%;
       }
-      flex-basis: unset;
     }
     .search-input__search {
-      flex-basis: unset;
+      padding: 0;
       button {
         width: 100%;
       }
