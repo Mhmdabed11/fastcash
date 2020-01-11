@@ -38,7 +38,6 @@ export const SIGNUP_MUTATION = gql`
 `;
 
 function Register(props) {
-  console.log(props);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [error, setError] = React.useState([]);
   const [signUp] = useMutation(SIGNUP_MUTATION, {

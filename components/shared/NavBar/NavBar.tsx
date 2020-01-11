@@ -42,7 +42,9 @@ export default function NavBar({ authenticated }: NavBarProps) {
             <FontAwesomeIcon icon={faUser} /> &nbsp; Mohammad Abed
           </a>
           <div className="navbar-dropdown">
-            <a className="navbar-item">Profile</a>
+            <Link href="/profile">
+              <a className="navbar-item">Profile</a>
+            </Link>
             <hr className="navbar-divider" />
             <a className="navbar-item" onClick={handleLogOut}>
               Logout

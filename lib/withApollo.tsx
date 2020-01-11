@@ -49,14 +49,12 @@ export default withApollo(
         // const token = localStorage.getItem("token");
         // const { token } = nextCookie(ctx);
         const token = cookie.get("token");
-        console.log("TOKEN1111", token);
         operation.setContext({
           headers: {
             ...headers,
             authorization: token ? `Bearer ${token}` : ""
           }
         });
-        console.log("HEY");
       },
 
       cache: new InMemoryCache().restore(initialState || {})

@@ -28,7 +28,7 @@ const GET_LATEST_POSTS = gql`
 `;
 
 const Home = ({ authenticated }: HomeProps) => {
-  const { loading, error, data } = useQuery(GET_LATEST_POSTS, {});
+  const { loading, error, data } = useQuery(GET_LATEST_POSTS);
   return (
     <div>
       <Head>
