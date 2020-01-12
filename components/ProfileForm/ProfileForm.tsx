@@ -49,141 +49,229 @@ export default function ProfileForm({
     Router.push("/");
   };
 
+  // check if there are any validation errors
+  const hasErrors = React.useCallback(() => {
+    let isError = false;
+    Object.keys(values).forEach(key => {
+      if (values[key].errorLabel) {
+        isError = true;
+      }
+    });
+    return isError;
+  }, [values]);
+
   return (
     <form data-testid="profile-form" onSubmit={handleSubmit}>
-      <hr style={{ backgroundColor: "#b2b2b2" }} />
-      <div className="columns is-multiline">
-        <div className="column is-half">
-          <div className="profile-basics">
+      <hr className="profile-form__page-break" />
+      <div className="profile-form__subcontainer">
+        <div className="columns is-multiline">
+          <div className="column profile-basics">
             <p className="profile-basics__title">Basics</p>
             <p className="profile-basics__description">
               This information will show publicly so be careful what you provide
             </p>
           </div>
         </div>
-        <div className="column is-half">
-          <div className="columns is-multiline">
-            <div className="column is-half">
-              <Input
-                label="First Name"
-                name="firstName"
-                placeholder={""}
-                value={values.firstName ? values.firstName.value : ""}
-                onChange={onChange}
-                error={values.firstName ? values.firstName.errorLabel : ""}
-              />
+        <div>
+          <div>
+            <div className="columns is-multiline">
+              <div className="column is-one-third">
+                <label htmlFor="" className="label">
+                  First Name{" "}
+                  <span title="required" className="required-astrisk">
+                    *
+                  </span>
+                </label>
+              </div>
+              <div className="column">
+                <Input
+                  name="firstName"
+                  placeholder={""}
+                  value={values.firstName ? values.firstName.value : ""}
+                  onChange={onChange}
+                  error={values.firstName ? values.firstName.errorLabel : ""}
+                />
+              </div>
             </div>
-            <div className="column is-half">
-              <Input
-                label="Last Name"
-                name="lastName"
-                placeholder={""}
-                value={values.lastName ? values.lastName.value : ""}
-                onChange={onChange}
-                error={values.lastName ? values.lastName.errorLabel : ""}
-              />
+            <div className="columns is-multiline">
+              <div className="column  is-one-third">
+                <label htmlFor="" className="label">
+                  Last Name{" "}
+                  <span title="required" className="required-astrisk">
+                    *
+                  </span>
+                </label>
+              </div>
+              <div className="column">
+                <Input
+                  name="lastName"
+                  placeholder={""}
+                  value={values.lastName ? values.lastName.value : ""}
+                  onChange={onChange}
+                  error={values.lastName ? values.lastName.errorLabel : ""}
+                />
+              </div>
             </div>
-            <div className="column is-half">
-              <Select
-                label="Country"
-                options={countryList}
-                name="country"
-                value={values.country ? values.country.value : ""}
-                onChange={onChange}
-                placeholder="Country"
-                error={values.country ? values.country.errorLabel : ""}
-              />
+            <div className="columns is-multiline">
+              <div className="column  is-one-third">
+                <label htmlFor="" className="label">
+                  Country{" "}
+                  <span title="required" className="required-astrisk">
+                    *
+                  </span>
+                </label>
+              </div>
+              <div className="column">
+                <Select
+                  options={countryList}
+                  name="country"
+                  value={values.country ? values.country.value : ""}
+                  onChange={onChange}
+                  placeholder="Country"
+                  error={values.country ? values.country.errorLabel : ""}
+                />
+              </div>
             </div>
-            <div className="column is-half">
-              <Input
-                label="Phone Number"
-                name="phoneNumber"
-                placeholder={""}
-                value={values.phoneNumber ? values.phoneNumber.value : ""}
-                onChange={onChange}
-              />
+            <div className="columns is-multiline">
+              <div className="column  is-one-third">
+                <label htmlFor="" className="label">
+                  Phone Number
+                </label>
+              </div>
+              <div className="column">
+                <Input
+                  name="phoneNumber"
+                  placeholder={""}
+                  value={values.phoneNumber ? values.phoneNumber.value : ""}
+                  onChange={onChange}
+                />
+              </div>
             </div>
-            <div className="column is-half">
-              <label htmlFor="" className="label">
-                Password
-              </label>
-              <PrimaryAnchor to="/profile">Change Password</PrimaryAnchor>
+            <div className="columns is-multiline">
+              <div className="column  is-one-third">
+                <label htmlFor="" className="label">
+                  Password
+                </label>
+              </div>
+              <div className="column">
+                <PrimaryAnchor to="/profile">Change Password</PrimaryAnchor>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <hr style={{ backgroundColor: "#b2b2b2" }} />
+      <hr className="profile-form__page-break" />
 
-      <div className="columns is-multiline">
-        <div className="column is-half">
-          <div className="profile-about">
-            <p className="profile-about__title">Tell us more about yourself</p>
-            <p className="profile-about__description">
-              This information will show publicly so be careful what you provide
-            </p>
+      <div className="profile-form__subcontainer">
+        <div className="columns is-multiline">
+          <div className="column is-full">
+            <div className="profile-about">
+              <p className="profile-about__title">
+                Tell us more about yourself
+              </p>
+              <p className="profile-about__description">
+                This information will show publicly so be careful what you
+                provide
+              </p>
+            </div>
           </div>
         </div>
-        <div className="column is-half">
-          <div className="columns is-multiline">
-            <div className="column is-half">
-              <Select
-                label="Years of Experience"
-                options={yearsOfExperienceList}
-                name="yearsOfExperience"
-                value={
-                  values.yearsOfExperience ? values.yearsOfExperience.value : ""
-                }
-                onChange={onChange}
-                placeholder="Year"
-              />
+        <div>
+          <div>
+            <div className="columns is-multiline">
+              <div className="column  is-one-third">
+                <label htmlFor="" className="label">
+                  Years of Experience
+                </label>
+              </div>
+              <div className="column">
+                <Select
+                  options={yearsOfExperienceList}
+                  name="yearsOfExperience"
+                  value={
+                    values.yearsOfExperience
+                      ? values.yearsOfExperience.value
+                      : ""
+                  }
+                  onChange={onChange}
+                  placeholder="Year"
+                />
+              </div>
             </div>
-            <div className="column is-half">
-              <Select
-                label="Degree Achieved"
-                options={degreesList}
-                name="degree"
-                value={values.degree ? values.degree.value : ""}
-                onChange={onChange}
-                placeholder="Degree"
-              />
+            <div className="columns is-mutiline">
+              <div className="column  is-one-third">
+                <label htmlFor="" className="label">
+                  Degree Achieved
+                </label>
+              </div>
+              <div className="column">
+                <Select
+                  options={degreesList}
+                  name="degree"
+                  value={values.degree ? values.degree.value : ""}
+                  onChange={onChange}
+                  placeholder="Degree"
+                />
+              </div>
             </div>
-            <div className="column is-half">
-              <Input
-                label="Headline"
-                name="headline"
-                placeholder={""}
-                value={values.headline ? values.headline.value : ""}
-                onChange={onChange}
-              />
+            <div className="columns is-multiline">
+              <div className="column is-one-third">
+                <label htmlFor="" className="label">
+                  Headline
+                </label>
+              </div>
+              <div className="column">
+                <Input
+                  name="headline"
+                  placeholder={""}
+                  value={values.headline ? values.headline.value : ""}
+                  onChange={onChange}
+                />
+              </div>
             </div>
-            <div className="column is-half">
-              <Input
-                label="Skills"
-                name="skills"
-                placeholder={""}
-                value=""
-                onChange={onChange}
-              />
+            <div className="columns is-multiline">
+              <div className="column is-one-third">
+                <label htmlFor="" className="label">
+                  Skills
+                </label>
+              </div>
+              <div className="column">
+                <Input
+                  name="skills"
+                  placeholder={""}
+                  value=""
+                  onChange={onChange}
+                />
+              </div>
             </div>
-            <div className="column is-full">
-              <TextArea
-                label="About"
-                value={values.about ? values.about.value : ""}
-                placeholder="about"
-                name="about"
-                onChange={onChange}
-              ></TextArea>
+            <div className="columns is-multiline">
+              <div className="column is-one-third">
+                <label htmlFor="" className="label">
+                  About
+                </label>
+              </div>
+              <div className="column">
+                <TextArea
+                  value={values.about ? values.about.value : ""}
+                  placeholder="about"
+                  name="about"
+                  onChange={onChange}
+                ></TextArea>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <hr style={{ backgroundColor: "#b2b2b2" }} />
+
+      <hr className="profile-form__page-break" />
       <div className="profile-submit-btns buttons is-flex">
         <SecondaryButton onClick={handleDiscardChanges}>
           Discard Changes
         </SecondaryButton>
-        <PrimaryButton loading={updatingUser}>Save</PrimaryButton>
+        <PrimaryButton disabled={hasErrors()} loading={updatingUser}>
+          Save
+        </PrimaryButton>
       </div>
     </form>
   );

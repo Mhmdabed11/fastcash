@@ -1,26 +1,36 @@
 $description-color: var(--light-gray);
-.profile-basics {
-  .profile-basics__title {
-    font-size: 1.125rem;
-    font-weight: 500;
+
+.profile-form__subcontainer {
+  .profile-basics {
+    .profile-basics__title {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    .profile-basics__description {
+      color: $description-color;
+      font-size: 0.8125rem;
+    }
   }
-  .profile-basics__description {
-    color: $description-color;
-    font-size: 0.8125rem;
+
+  .profile-about {
+    .profile-about__title {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    .profile-about__description {
+      color: $description-color;
+      font-size: 0.8125rem;
+    }
+  }
+
+  .label {
+    font-weight: normal;
   }
 }
 
-.profile-about {
-  .profile-about__title {
-    font-size: 1.125rem;
-    font-weight: 500;
-  }
-  .profile-about__description {
-    color: $description-color;
-    font-size: 0.8125rem;
-  }
+.profile-form__page-break {
+  background-color: #e1e1e1;
 }
-
 .profile-submit-btns {
   justify-content: flex-end;
 }
