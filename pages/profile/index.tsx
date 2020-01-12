@@ -9,11 +9,12 @@ var jwtDecode = require("jwt-decode");
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Loading from "../../components/shared/Loading/Loading";
-import { useToasts } from "react-toast-notifications";
+import { withAuthSync } from "../../utils/HOC/withAuthSync";
 
 type ProfileProps = {
   authenticated: boolean;
   userId: string;
+  notify: (message, type) => void;
 };
 
 const GET_USER = gql`
@@ -43,6 +44,7 @@ const UPDATE_USER = gql`
     $degree: String
     $headline: String
     $about: String
+    $skills: [String!]
   ) {
     updateUser(
       firstName: $firstName
@@ -53,6 +55,7 @@ const UPDATE_USER = gql`
       degree: $degree
       headline: $headline
       about: $about
+      skills: $skills
     ) {
       id
       firstName
@@ -63,22 +66,22 @@ const UPDATE_USER = gql`
       degree
       headline
       about
+      skills
     }
   }
 `;
 
-export default function Profile({ authenticated, userId }: ProfileProps) {
+function Profile({ authenticated, userId, notify }: ProfileProps) {
   const [values, setValues] = React.useState({});
-  const { addToast } = useToasts();
   const [isUpdatingUser, setIsUpdatingUser] = React.useState(false);
   const [updateUser] = useMutation(UPDATE_USER, {
     onCompleted: data => {
       setIsUpdatingUser(false);
-      addToast("Saved Successfully", { appearance: "success" });
+      notify("Saved Successfully", "success");
     },
     onError: err => {
       setIsUpdatingUser(false);
-      addToast("Failed to Save. Please Try Again", { appearance: "error" });
+      notify("Failed to Save. Please Try Again", "error");
     }
   });
   const { loading, error, data } = useQuery(GET_USER, {
@@ -97,7 +100,9 @@ export default function Profile({ authenticated, userId }: ProfileProps) {
     if (!isUpdatingUser) {
       setIsUpdatingUser(true);
       delete values.id;
-      Object.keys(values).map(key => (values[key] = values[key].value));
+      Object.keys(values).map(
+        key => (values[key] = values[key] ? values[key].value : null)
+      );
       updateUser({
         variables: {
           firstName: values.firstName,
@@ -107,7 +112,8 @@ export default function Profile({ authenticated, userId }: ProfileProps) {
           yearsOfExperience: values.yearsOfExperience,
           degree: values.degree,
           headline: values.headline,
-          about: values.about
+          about: values.about,
+          skills: values.skills
         }
       });
     }
@@ -147,3 +153,5 @@ Profile.getInitialProps = async ctx => {
   const payload = jwtDecode(token);
   return { authenticated, userId: payload.userId };
 };
+
+export default withAuthSync(Profile);

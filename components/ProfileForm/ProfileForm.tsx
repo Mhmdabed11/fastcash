@@ -18,6 +18,26 @@ type FormProps = {
   updatingUser: boolean;
 };
 
+const skills = [
+  { value: "React", label: "react" },
+  { label: "html", value: "html" }
+];
+
+let countries = countryList.map(country => ({
+  value: country,
+  label: country
+}));
+
+let degrees = degreesList.map(degree => ({
+  value: degree,
+  label: degree
+}));
+
+let years = yearsOfExperienceList.map(degree => ({
+  value: degree,
+  label: degree
+}));
+
 export default function ProfileForm({
   initialValues = {},
   onSubmit,
@@ -49,16 +69,37 @@ export default function ProfileForm({
     Router.push("/");
   };
 
+  // handlke countries change
+  const handleSelectChange = (selectedOption, name) => {
+    let finalValue = selectedOption;
+    if (Array.isArray(selectedOption)) {
+      let temp = [];
+      selectedOption.forEach(option => temp.push(option.value));
+      finalValue = { value: temp, label: temp };
+    }
+    setValues(currVal => ({ ...currVal, [name]: finalValue }));
+  };
+
   // check if there are any validation errors
   const hasErrors = React.useCallback(() => {
     let isError = false;
     Object.keys(values).forEach(key => {
-      if (values[key].errorLabel) {
+      if (values[key] && values[key].errorLabel) {
         isError = true;
       }
     });
     return isError;
   }, [values]);
+
+  // console.log(values.skills);
+  // skills value
+  const skillsValue = React.useMemo(
+    () =>
+      values.skills && values.skills.value && Array.isArray(values.skills.value)
+        ? values.skills.value.map(val => ({ value: val, label: val }))
+        : null,
+    [values.skills]
+  );
 
   return (
     <form data-testid="profile-form" onSubmit={handleSubmit}>
@@ -76,8 +117,8 @@ export default function ProfileForm({
           <div>
             <div className="columns is-multiline">
               <div className="column is-one-third">
-                <label htmlFor="" className="label">
-                  First Name{" "}
+                <label htmlFor="firstName" className="label">
+                  First Name
                   <span title="required" className="required-astrisk">
                     *
                   </span>
@@ -95,8 +136,8 @@ export default function ProfileForm({
             </div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="" className="label">
-                  Last Name{" "}
+                <label htmlFor="lastName" className="label">
+                  Last Name
                   <span title="required" className="required-astrisk">
                     *
                   </span>
@@ -105,7 +146,7 @@ export default function ProfileForm({
               <div className="column">
                 <Input
                   name="lastName"
-                  placeholder={""}
+                  placeholder={"Last Name"}
                   value={values.lastName ? values.lastName.value : ""}
                   onChange={onChange}
                   error={values.lastName ? values.lastName.errorLabel : ""}
@@ -114,8 +155,8 @@ export default function ProfileForm({
             </div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="" className="label">
-                  Country{" "}
+                <label htmlFor="country" className="label">
+                  Country
                   <span title="required" className="required-astrisk">
                     *
                   </span>
@@ -123,10 +164,17 @@ export default function ProfileForm({
               </div>
               <div className="column">
                 <Select
-                  options={countryList}
+                  options={countries}
                   name="country"
-                  value={values.country ? values.country.value : ""}
-                  onChange={onChange}
+                  value={
+                    values.country && values.country.value
+                      ? {
+                          value: values.country.value,
+                          label: values.country.value
+                        }
+                      : null
+                  }
+                  onChange={val => handleSelectChange(val, "country")}
                   placeholder="Country"
                   error={values.country ? values.country.errorLabel : ""}
                 />
@@ -134,7 +182,7 @@ export default function ProfileForm({
             </div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="" className="label">
+                <label htmlFor="phoneNumber" className="label">
                   Phone Number
                 </label>
               </div>
@@ -149,9 +197,7 @@ export default function ProfileForm({
             </div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="" className="label">
-                  Password
-                </label>
+                <label className="label">Password</label>
               </div>
               <div className="column">
                 <PrimaryAnchor to="/profile">Change Password</PrimaryAnchor>
@@ -181,43 +227,53 @@ export default function ProfileForm({
           <div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="" className="label">
+                <label htmlFor="yearsOfExperience" className="label">
                   Years of Experience
                 </label>
               </div>
               <div className="column">
                 <Select
-                  options={yearsOfExperienceList}
+                  options={years}
                   name="yearsOfExperience"
                   value={
-                    values.yearsOfExperience
-                      ? values.yearsOfExperience.value
-                      : ""
+                    values.yearsOfExperience && values.yearsOfExperience.value
+                      ? {
+                          value: values.yearsOfExperience.value,
+                          label: values.yearsOfExperience.value
+                        }
+                      : null
                   }
-                  onChange={onChange}
+                  onChange={val => handleSelectChange(val, "yearsOfExperience")}
                   placeholder="Year"
                 />
               </div>
             </div>
             <div className="columns is-mutiline">
               <div className="column  is-one-third">
-                <label htmlFor="" className="label">
+                <label htmlFor="degree" className="label">
                   Degree Achieved
                 </label>
               </div>
               <div className="column">
                 <Select
-                  options={degreesList}
+                  options={degrees}
                   name="degree"
-                  value={values.degree ? values.degree.value : ""}
-                  onChange={onChange}
+                  value={
+                    values.degree && values.degree.value
+                      ? {
+                          value: values.degree.value,
+                          label: values.degree.value
+                        }
+                      : null
+                  }
+                  onChange={val => handleSelectChange(val, "degree")}
                   placeholder="Degree"
                 />
               </div>
             </div>
             <div className="columns is-multiline">
               <div className="column is-one-third">
-                <label htmlFor="" className="label">
+                <label htmlFor="headline" className="label">
                   Headline
                 </label>
               </div>
@@ -232,22 +288,24 @@ export default function ProfileForm({
             </div>
             <div className="columns is-multiline">
               <div className="column is-one-third">
-                <label htmlFor="" className="label">
+                <label htmlFor="skills" className="label">
                   Skills
                 </label>
               </div>
               <div className="column">
-                <Input
+                <Select
+                  options={skills}
                   name="skills"
-                  placeholder={""}
-                  value=""
-                  onChange={onChange}
+                  value={skillsValue}
+                  onChange={val => handleSelectChange(val, "skills")}
+                  placeholder="Skills"
+                  isMulti
                 />
               </div>
             </div>
             <div className="columns is-multiline">
               <div className="column is-one-third">
-                <label htmlFor="" className="label">
+                <label htmlFor="about" className="label">
                   About
                 </label>
               </div>
@@ -257,7 +315,7 @@ export default function ProfileForm({
                   placeholder="about"
                   name="about"
                   onChange={onChange}
-                ></TextArea>
+                />
               </div>
             </div>
           </div>

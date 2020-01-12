@@ -2,9 +2,15 @@ import * as React from "react";
 import "./Select.scss";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactSelect from "react-select";
+
+type SelectValue = {
+  value: string | number;
+  label: string | number;
+};
 
 type SelectProps = {
-  options: (string | number)[];
+  options: object[];
   name: string;
   multiple?: boolean;
   rounded?: boolean;
@@ -13,11 +19,13 @@ type SelectProps = {
   iconLeft?: IconProp;
   label?: string;
   error?: string;
-  value: string | number;
+  value: SelectValue | {};
   onChange: (e) => void;
   required?: boolean;
   fullWidth?: boolean;
-  placeholder: string;
+  placeholder?: string;
+  clearable?: boolean;
+  isMulti?: boolean;
 };
 
 export default function Select({
@@ -34,17 +42,26 @@ export default function Select({
   onChange,
   required = false,
   fullWidth = true,
-  placeholder
+  placeholder,
+  isMulti,
+  clearable
 }: SelectProps) {
   const multipleClassName = multiple ? "is-multiple" : "";
   const roundedClassName = rounded ? "is-rounded" : "";
   const sizeClassName = size ? `is-${size}` : "";
   const loadingClassName = loading ? "is-loading" : "";
-  const errorClassName = error ? "is-danger" : "";
   const fullWidthClassName = fullWidth ? "is-fullwidth" : "";
 
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      borderColor: error ? "red" : "#dbdbdb"
+      // You can also use state.isFocused to conditionally style based on the focus state
+    })
+  };
+
   //combine classNames
-  const className = `${multipleClassName} ${roundedClassName} ${sizeClassName} ${loadingClassName} ${errorClassName} ${fullWidthClassName}`;
+  const className = `${multipleClassName} ${roundedClassName} ${sizeClassName} ${loadingClassName}  ${fullWidthClassName}`;
 
   //render label
   const renderLabel = () => {
@@ -53,23 +70,6 @@ export default function Select({
         {label}
       </label>
     ) : null;
-  };
-
-  // render options
-  const renderOptions = (): React.ReactFragment => {
-    return (
-      <>
-        <option value="" disabled>
-          {placeholder}
-        </option>
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
-        ;
-      </>
-    );
   };
 
   // render left icon
@@ -93,15 +93,20 @@ export default function Select({
     <div className="field">
       {renderLabel()}
       <div className={`control ${iconLeft ? "has-icons-left" : ""} `}>
-        <div className={`select ${className}`}>
-          <select
-            name={name}
-            value={value}
-            onChange={onChange}
+        <div className={` ${className}`}>
+          <ReactSelect
             required={required}
-          >
-            {renderOptions()}
-          </select>
+            name={name}
+            onChange={onChange}
+            value={value}
+            options={options}
+            styles={customStyles}
+            isMulti={isMulti}
+            isClearable={clearable}
+            placeholder={placeholder}
+            id="react-select-unique-id"
+            instanceId="react-select-unique-id"
+          />
         </div>
         {renderError()}
         {renderLeftIcon()}
