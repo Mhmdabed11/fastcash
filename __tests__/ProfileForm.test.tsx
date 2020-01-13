@@ -6,9 +6,9 @@ import {
   getByPlaceholderText
 } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import ProfileForm from "./ProfileForm";
+import ProfileForm from "../components/ProfileForm/ProfileForm";
 import selectEvent from "react-select-event";
-import { yearsOfExperienceList } from "../../utils/yearsOfExperience";
+import { yearsOfExperienceList } from "../utils/yearsOfExperience";
 
 //initialvalues
 const initialValues = {

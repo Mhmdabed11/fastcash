@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import SearchInput from "./SearchInput";
+import SearchInput from "../components/shared/SearchInput/SearchInput";
 
 describe("Test search input element", () => {
   test("Submit calls onSubmit funciton ", () => {

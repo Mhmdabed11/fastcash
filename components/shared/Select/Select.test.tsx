@@ -7,7 +7,16 @@ describe("Test BaseButton", () => {
     const { queryByTestId } = render(
       <Select
         name="country"
-        options={["Lebanon", "Canada"]}
+        options={[
+          {
+            label: "Lebanon",
+            value: "Lebanon"
+          },
+          {
+            label: "Canada",
+            value: "Canada"
+          }
+        ]}
         error="Required"
         value=""
         onChange={() => {}}
@@ -21,7 +30,16 @@ describe("Test BaseButton", () => {
       const { queryByTestId } = render(
         <Select
           name="country"
-          options={["Lebanon", "Canada"]}
+          options={[
+            {
+              label: "Lebanon",
+              value: "Lebanon"
+            },
+            {
+              label: "Canada",
+              value: "Canada"
+            }
+          ]}
           value=""
           onChange={() => {}}
           placeholder="Country"

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Input from "./Input";
+import Input from "../components/shared/Input/Input";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 describe("Test error element", () => {

@@ -5,7 +5,7 @@ import {
   getAllByPlaceholderText
 } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import SignUpForm from "./SignupForm";
+import SignUpForm from "../components/SignUpForm/SignupForm";
 import selectEvent from "react-select-event";
 
 describe("Test sign up form", () => {

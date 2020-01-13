@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import TextArea from "./TextArea";
+import TextArea from "../components/shared/TextArea/TextArea";
 
 describe("Test error element", () => {
   test("Error element renders when error prop is supplied", () => {
