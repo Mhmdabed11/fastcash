@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import "./ProfileForm.scss";
 import Input from "../shared/Input/Input";
 import Select from "../shared/Select/Select";
@@ -19,7 +19,7 @@ type FormProps = {
 };
 
 const skills = [
-  { value: "React", label: "react" },
+  { value: "React", label: "React" },
   { label: "html", value: "html" }
 ];
 
@@ -127,7 +127,7 @@ export default function ProfileForm({
               <div className="column">
                 <Input
                   name="firstName"
-                  placeholder={""}
+                  placeholder={"First Name"}
                   value={values.firstName ? values.firstName.value : ""}
                   onChange={onChange}
                   error={values.firstName ? values.firstName.errorLabel : ""}
@@ -177,6 +177,7 @@ export default function ProfileForm({
                   onChange={val => handleSelectChange(val, "country")}
                   placeholder="Country"
                   error={values.country ? values.country.errorLabel : ""}
+                  inputId="country"
                 />
               </div>
             </div>
@@ -189,7 +190,7 @@ export default function ProfileForm({
               <div className="column">
                 <Input
                   name="phoneNumber"
-                  placeholder={""}
+                  placeholder={"Phone Number"}
                   value={values.phoneNumber ? values.phoneNumber.value : ""}
                   onChange={onChange}
                 />
@@ -235,6 +236,7 @@ export default function ProfileForm({
                 <Select
                   options={years}
                   name="yearsOfExperience"
+                  inputId="yearsOfExperience"
                   value={
                     values.yearsOfExperience && values.yearsOfExperience.value
                       ? {
@@ -258,6 +260,7 @@ export default function ProfileForm({
                 <Select
                   options={degrees}
                   name="degree"
+                  inputId="degree"
                   value={
                     values.degree && values.degree.value
                       ? {
@@ -280,7 +283,7 @@ export default function ProfileForm({
               <div className="column">
                 <Input
                   name="headline"
-                  placeholder={""}
+                  placeholder={"Headline"}
                   value={values.headline ? values.headline.value : ""}
                   onChange={onChange}
                 />
@@ -294,6 +297,7 @@ export default function ProfileForm({
               </div>
               <div className="column">
                 <Select
+                  inputId="skills"
                   options={skills}
                   name="skills"
                   value={skillsValue}
@@ -312,7 +316,7 @@ export default function ProfileForm({
               <div className="column">
                 <TextArea
                   value={values.about ? values.about.value : ""}
-                  placeholder="about"
+                  placeholder="About"
                   name="about"
                   onChange={onChange}
                 />

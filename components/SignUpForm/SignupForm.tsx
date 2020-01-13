@@ -111,9 +111,16 @@ export default function SignupForm({ onSubmit, submitting }: FormProps) {
           />
         </div>
         <div className="column is-full">
+          <label
+            style={{ visibility: "hidden", display: "none" }}
+            htmlFor="country"
+          >
+            Country
+          </label>
           <Select
             options={countries}
             name="country"
+            inputId="country"
             value={
               values.country && values.country.value
                 ? {

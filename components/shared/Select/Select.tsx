@@ -26,6 +26,7 @@ type SelectProps = {
   placeholder?: string;
   clearable?: boolean;
   isMulti?: boolean;
+  inputId?: string;
 };
 
 export default function Select({
@@ -44,7 +45,8 @@ export default function Select({
   fullWidth = true,
   placeholder,
   isMulti,
-  clearable
+  clearable,
+  inputId
 }: SelectProps) {
   const multipleClassName = multiple ? "is-multiple" : "";
   const roundedClassName = rounded ? "is-rounded" : "";
@@ -106,6 +108,7 @@ export default function Select({
             placeholder={placeholder}
             id="react-select-unique-id"
             instanceId="react-select-unique-id"
+            inputId={inputId}
           />
         </div>
         {renderError()}
