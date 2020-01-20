@@ -1,0 +1,46 @@
+$description-color: var(--light-gray);
+
+.postjob-form__subcontainer {
+  .postjob-basics {
+    .postjob-basics__title {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    .postjob-basics__description {
+      color: $description-color;
+      font-size: 0.8125rem;
+    }
+  }
+
+  .postjob-about {
+    .postjob-about__title {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    .postjob-about__description {
+      color: $description-color;
+      font-size: 0.8125rem;
+    }
+  }
+
+  .label {
+    font-weight: normal;
+  }
+}
+
+.postjob-form__page-break {
+  background-color: #e1e1e1;
+}
+.postjob-submit-btns {
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 768px) {
+  .postjob-submit-btns {
+    flex-direction: column-reverse;
+    button {
+      width: 100%;
+      margin: 0.25rem 0 !important;
+    }
+  }
+}

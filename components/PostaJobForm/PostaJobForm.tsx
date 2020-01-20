@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./ProfileForm.scss";
+import "./PostaJob.scss";
 import Input from "../shared/Input/Input";
 import Select from "../shared/Select/Select";
 import PrimaryButton from "../shared/PrimaryButton/PrimaryButton";
@@ -15,7 +15,6 @@ import Router from "next/router";
 type FormProps = {
   initialValues: object;
   onSubmit: (values: object) => void;
-  updatingUser: boolean;
 };
 
 const skills = [
@@ -38,11 +37,7 @@ let years = yearsOfExperienceList.map(degree => ({
   label: degree
 }));
 
-export default function ProfileForm({
-  initialValues = {},
-  onSubmit,
-  updatingUser
-}: FormProps) {
+export default function PostaJobForm({ initialValues, onSubmit }: FormProps) {
   const { values, onChange, setValues, handleFormSubmit } = useFormValidation(
     initialValues,
     validationSchema
@@ -54,12 +49,12 @@ export default function ProfileForm({
 
   // update user
   const handleUpdateUser = () => {
+    console.log(values);
     onSubmit(values);
   };
 
   // handle submit
   const handleSubmit = e => {
-    console.log(values);
     e.preventDefault();
     handleFormSubmit(handleUpdateUser);
   };
@@ -103,14 +98,16 @@ export default function ProfileForm({
   );
 
   return (
-    <form data-testid="profile-form" onSubmit={handleSubmit}>
-      <hr className="profile-form__page-break" />
-      <div className="profile-form__subcontainer">
+    <form data-testid="postjob-form" onSubmit={handleSubmit}>
+      <hr className="postjob-form__page-break" />
+      <div className="postjob-form__subcontainer">
         <div className="columns is-multiline">
-          <div className="column profile-basics">
-            <p className="profile-basics__title">Basics</p>
-            <p className="profile-basics__description">
-              This information will show publicly so be careful what you provide
+          <div className="column postjob-basics">
+            <p className="postjob-basics__title">
+              What job do you want to post ?
+            </p>
+            <p className="postjob-basics__description">
+              Please provide information about the job you want to post
             </p>
           </div>
         </div>
@@ -118,8 +115,8 @@ export default function ProfileForm({
           <div>
             <div className="columns is-multiline">
               <div className="column is-one-third">
-                <label htmlFor="firstName" className="label">
-                  First Name
+                <label htmlFor="companyName" className="label">
+                  Company Name
                   <span title="required" className="required-astrisk">
                     *
                   </span>
@@ -127,18 +124,20 @@ export default function ProfileForm({
               </div>
               <div className="column">
                 <Input
-                  name="firstName"
+                  name="companyName"
                   placeholder={"First Name"}
-                  value={values.firstName ? values.firstName.value : ""}
+                  value={values.companyName ? values.companyName.value : ""}
                   onChange={onChange}
-                  error={values.firstName ? values.firstName.errorLabel : ""}
+                  error={
+                    values.companyName ? values.companyName.errorLabel : ""
+                  }
                 />
               </div>
             </div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="lastName" className="label">
-                  Last Name
+                <label htmlFor="jobTitle" className="label">
+                  Job Title
                   <span title="required" className="required-astrisk">
                     *
                   </span>
@@ -146,18 +145,18 @@ export default function ProfileForm({
               </div>
               <div className="column">
                 <Input
-                  name="lastName"
+                  name="jobTitle"
                   placeholder={"Last Name"}
-                  value={values.lastName ? values.lastName.value : ""}
+                  value={values.jobTitle ? values.jobTitle.value : ""}
                   onChange={onChange}
-                  error={values.lastName ? values.lastName.errorLabel : ""}
+                  error={values.jobTitle ? values.jobTitle.errorLabel : ""}
                 />
               </div>
             </div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="country" className="label">
-                  Country
+                <label htmlFor="location" className="label">
+                  Location
                   <span title="required" className="required-astrisk">
                     *
                   </span>
@@ -166,61 +165,57 @@ export default function ProfileForm({
               <div className="column">
                 <Select
                   options={countries}
-                  name="country"
+                  name="location"
                   value={
-                    values.country && values.country.value
+                    values.location && values.location.value
                       ? {
-                          value: values.country.value,
-                          label: values.country.value
+                          value: values.location.value,
+                          label: values.location.value
                         }
                       : null
                   }
-                  onChange={val => handleSelectChange(val, "country")}
-                  placeholder="Country"
-                  error={values.country ? values.country.errorLabel : ""}
-                  inputId="country"
+                  onChange={val => handleSelectChange(val, "location")}
+                  placeholder="Location"
+                  error={values.location ? values.location.errorLabel : ""}
+                  inputId="location"
                 />
               </div>
             </div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="phoneNumber" className="label">
-                  Phone Number
+                <label htmlFor="jobDescription" className="label">
+                  Job Description
                 </label>
               </div>
               <div className="column">
-                <Input
-                  name="phoneNumber"
-                  placeholder={"Phone Number"}
-                  value={values.phoneNumber ? values.phoneNumber.value : ""}
+                <TextArea
+                  name="jobDescription"
+                  placeholder={"Job Description"}
+                  value={
+                    values.jobDescription ? values.jobDescription.value : ""
+                  }
                   onChange={onChange}
+                  error={
+                    values.jobDescription
+                      ? values.jobDescription.errorLabel
+                      : ""
+                  }
                 />
-              </div>
-            </div>
-            <div className="columns is-multiline">
-              <div className="column  is-one-third">
-                <label className="label">Password</label>
-              </div>
-              <div className="column">
-                <PrimaryAnchor to="/profile">Change Password</PrimaryAnchor>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <hr className="profile-form__page-break" />
+      <hr className="postjob-form__page-break" />
 
-      <div className="profile-form__subcontainer">
+      <div className="postjob-form__subcontainer">
         <div className="columns is-multiline">
           <div className="column is-full">
-            <div className="profile-about">
-              <p className="profile-about__title">
-                Tell us more about yourself
-              </p>
-              <p className="profile-about__description">
-                This information will show publicly so be careful what you
-                provide
+            <div className="postjob-about">
+              <p className="postjob-about__title">And a bit more</p>
+              <p className="postjob-about__description">
+                Please provide more information about the job you want to post
               </p>
             </div>
           </div>
@@ -229,97 +224,97 @@ export default function ProfileForm({
           <div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="yearsOfExperience" className="label">
-                  Years of Experience
+                <label htmlFor="category" className="label">
+                  Category
                 </label>
               </div>
               <div className="column">
                 <Select
                   options={years}
-                  name="yearsOfExperience"
-                  inputId="yearsOfExperience"
+                  name="category"
+                  inputId="category"
                   value={
-                    values.yearsOfExperience && values.yearsOfExperience.value
+                    values.category && values.category.value
                       ? {
-                          value: values.yearsOfExperience.value,
-                          label: values.yearsOfExperience.value
+                          value: values.category.value,
+                          label: values.category.value
                         }
                       : null
                   }
-                  onChange={val => handleSelectChange(val, "yearsOfExperience")}
-                  placeholder="Year"
+                  onChange={val => handleSelectChange(val, "category")}
+                  placeholder="Category"
+                  error={values.category ? values.category.errorLabel : ""}
                 />
               </div>
             </div>
             <div className="columns is-mutiline">
               <div className="column  is-one-third">
-                <label htmlFor="degree" className="label">
-                  Degree Achieved
+                <label htmlFor="currency" className="label">
+                  Currency
                 </label>
               </div>
               <div className="column">
                 <Select
                   options={degrees}
-                  name="degree"
-                  inputId="degree"
+                  name="currency"
+                  inputId="currency"
                   value={
-                    values.degree && values.degree.value
+                    values.currency && values.currency.value
                       ? {
-                          value: values.degree.value,
-                          label: values.degree.value
+                          value: values.currency.value,
+                          label: values.currency.value
                         }
                       : null
                   }
-                  onChange={val => handleSelectChange(val, "degree")}
-                  placeholder="Degree"
+                  onChange={val => handleSelectChange(val, "currency")}
+                  placeholder="Currency"
+                  error={values.currency ? values.currency.errorLabel : ""}
                 />
               </div>
             </div>
+
             <div className="columns is-multiline">
               <div className="column is-one-third">
-                <label htmlFor="headline" className="label">
-                  Headline
-                </label>
-              </div>
-              <div className="column">
-                <Input
-                  name="headline"
-                  placeholder={"Headline"}
-                  value={values.headline ? values.headline.value : ""}
-                  onChange={onChange}
-                />
-              </div>
-            </div>
-            <div className="columns is-multiline">
-              <div className="column is-one-third">
-                <label htmlFor="skills" className="label">
+                <label htmlFor="skillsRequired" className="label">
                   Skills
                 </label>
               </div>
               <div className="column">
                 <Select
-                  inputId="skills"
+                  inputId="skillsRequired"
                   options={skills}
-                  name="skills"
+                  name="skillsRequired"
                   value={skillsValue}
                   onChange={val => handleSelectChange(val, "skills")}
                   placeholder="Skills"
                   isMulti
+                  error={values.skills ? values.skills.errorLabel : ""}
                 />
               </div>
             </div>
-            <div className="columns is-multiline">
-              <div className="column is-one-third">
-                <label htmlFor="about" className="label">
-                  About
+
+            <div className="columns is-mutiline">
+              <div className="column  is-one-third">
+                <label htmlFor="type" className="label">
+                  Employment Type
                 </label>
               </div>
               <div className="column">
-                <TextArea
-                  value={values.about ? values.about.value : ""}
-                  placeholder="About"
-                  name="about"
-                  onChange={onChange}
+                <Select
+                  options={degrees}
+                  name="type"
+                  inputId="type"
+                  value={
+                    values.type && values.type.value
+                      ? {
+                          value: values.type.value,
+                          label: values.type.value
+                        }
+                      : null
+                  }
+                  onChange={val => handleSelectChange(val, "type")}
+                  placeholder="Employment Type"
+                  error={values.type ? values.type.errorLabel : ""}
                 />
               </div>
             </div>
@@ -327,14 +322,12 @@ export default function ProfileForm({
         </div>
       </div>
 
-      <hr className="profile-form__page-break" />
-      <div className="profile-submit-btns buttons is-flex">
+      <hr className="postjob-form__page-break" />
+      <div className="postjob-submit-btns buttons is-flex">
         <SecondaryButton onClick={handleDiscardChanges}>
           Discard Changes
         </SecondaryButton>
-        <PrimaryButton disabled={hasErrors()} loading={updatingUser}>
-          Save
-        </PrimaryButton>
+        <PrimaryButton disabled={hasErrors()}>Save</PrimaryButton>
       </div>
     </form>
   );

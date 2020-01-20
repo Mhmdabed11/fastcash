@@ -29,7 +29,7 @@ export default function NavBar({ authenticated }: NavBarProps) {
     }
     return (
       <>
-        <Link href="/">
+        <Link href="/postJob">
           <a className="navbar-item" data-testid="postJobAuthSection">
             <FontAwesomeIcon icon={faShoppingBag} /> &nbsp; Post a job
           </a>

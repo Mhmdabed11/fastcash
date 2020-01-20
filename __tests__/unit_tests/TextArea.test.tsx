@@ -1,16 +1,14 @@
 import * as React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Input from "../components/shared/Input/Input";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import TextArea from "../../components/shared/TextArea/TextArea";
 
 describe("Test error element", () => {
   test("Error element renders when error prop is supplied", () => {
     const { queryByTestId } = render(
-      <Input
-        name="firstName"
-        iconLeft={faUser}
-        placeholder={"First Name"}
+      <TextArea
+        name="about"
+        placeholder={"About"}
         error="Required"
         value=""
         onChange={e => {}}
@@ -22,10 +20,9 @@ describe("Test error element", () => {
 
   test("Error element doesn't render when error prop is not supplied", () => {
     const { queryByTestId } = render(
-      <Input
-        name="firstName"
-        iconLeft={faUser}
-        placeholder={"First Name"}
+      <TextArea
+        name="about"
+        placeholder={"About"}
         value=""
         onChange={e => {}}
       />

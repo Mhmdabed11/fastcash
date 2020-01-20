@@ -97,23 +97,25 @@ function Profile({ authenticated, userId, notify }: ProfileProps) {
 
   //update user
   const handleUpdateUser = values => {
+    let valuesCopy = { ...values };
     if (!isUpdatingUser) {
       setIsUpdatingUser(true);
-      delete values.id;
-      Object.keys(values).map(
-        key => (values[key] = values[key] ? values[key].value : null)
+      delete valuesCopy.id;
+      Object.keys(valuesCopy).map(
+        key =>
+          (valuesCopy[key] = valuesCopy[key] ? valuesCopy[key].value : null)
       );
       updateUser({
         variables: {
-          firstName: values.firstName,
-          lastName: values.lastName,
-          country: values.country,
-          phoneNumber: values.phoneNumber,
-          yearsOfExperience: values.yearsOfExperience,
-          degree: values.degree,
-          headline: values.headline,
-          about: values.about,
-          skills: values.skills
+          firstName: valuesCopy.firstName,
+          lastName: valuesCopy.lastName,
+          country: valuesCopy.country,
+          phoneNumber: valuesCopy.phoneNumber,
+          yearsOfExperience: valuesCopy.yearsOfExperience,
+          degree: valuesCopy.degree,
+          headline: valuesCopy.headline,
+          about: valuesCopy.about,
+          skills: valuesCopy.skills
         }
       });
     }

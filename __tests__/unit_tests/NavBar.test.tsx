@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import NavBar from "../components/shared/NavBar/NavBar";
+import NavBar from "../../components/shared/NavBar/NavBar";
 
 describe("Test NavBar", () => {
   test("Test if the navbar renders auth information when authenticated", () => {

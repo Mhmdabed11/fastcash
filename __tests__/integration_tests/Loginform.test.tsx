@@ -5,7 +5,8 @@ import {
   getAllByPlaceholderText
 } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import LoginForm from "../components/LoginForm/LoginForm";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import { MockedProvider } from "@apollo/react-testing";
 
 describe("Test Login Form", () => {
   test("Form submits correctly", () => {

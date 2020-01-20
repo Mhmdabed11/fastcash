@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import "./login.scss";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import gql from "graphql-tag";
@@ -7,9 +7,8 @@ import Message from "../../components/shared/Message/Message";
 import Router from "next/router";
 import Link from "next/link";
 import cookie from "js-cookie";
-import nextCookie from "next-cookies";
 
-const LOGIN_MUTATION = gql`
+export const LOGIN_MUTATION = gql`
   mutation loginMutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
@@ -23,7 +22,7 @@ const LOGIN_MUTATION = gql`
 function Login() {
   const [error, setError] = React.useState("");
   const [isLoggingIn, setIsLoggingIn] = React.useState(false);
-  const [login] = useMutation(LOGIN_MUTATION, {
+  const [login, { data }] = useMutation(LOGIN_MUTATION, {
     onCompleted: data => {
       const { token } = data.login;
       cookie.set("token", token);
