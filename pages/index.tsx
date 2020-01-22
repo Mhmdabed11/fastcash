@@ -15,6 +15,7 @@ const GET_LATEST_POSTS = gql`
   query getLatestPosts {
     posts(first: 5) {
       id
+      companyName
       title
       location
       description
@@ -22,7 +23,7 @@ const GET_LATEST_POSTS = gql`
         firstName
         lastName
       }
-      skillsRequired
+      skills
     }
   }
 `;

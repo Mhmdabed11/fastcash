@@ -10,7 +10,7 @@ type Post = {
   location: string;
   description: string;
   author: object;
-  skillsRequired: string[];
+  skills: string[];
 };
 
 type LatestPostsProps = {
@@ -46,7 +46,7 @@ export default function LatestPosts({ posts, loading }) {
                     type="Full-time"
                     description={post.description}
                     location={post.location}
-                    techStack={post.skillsRequired}
+                    techStack={post.skills}
                   />
                 ))}
           </div>

@@ -4,7 +4,7 @@ import NavBar from "../../components/shared/NavBar/NavBar";
 import nextCookie from "next-cookies";
 import Footer from "../../components/shared/Footer/Footer";
 var jwtDecode = require("jwt-decode");
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Loading from "../../components/shared/Loading/Loading";
 import { withAuthSync } from "../../utils/HOC/withAuthSync";
@@ -17,20 +17,60 @@ type PostJobProps = {
   notify: (message, type) => void;
 };
 
+const CREATE_POST = gql`
+  mutation createPost(
+    $title: String!
+    $companyName: String!
+    $description: String!
+    $location: String!
+    $salary: Int!
+    $currency: String!
+    $category: String!
+    $skills: [String!]!
+    $type: String!
+  ) {
+    createPost(
+      title: $title
+      description: $description
+      location: $location
+      salary: $salary
+      currency: $currency
+      category: $category
+      companyName: $companyName
+      skills: $skills
+      type: $type
+    ) {
+      id
+      title
+      companyName
+      description
+      location
+      salary
+      currency
+      category
+      skills
+      type
+    }
+  }
+`;
+
 const initialValues = {
   companyName: {
     value: ""
   },
-  jobTitle: {
+  title: {
     value: ""
   },
   location: {
     value: ""
   },
-  jobDescription: {
+  description: {
     value: ""
   },
   category: {
+    value: ""
+  },
+  salary: {
     value: ""
   },
   currency: {
@@ -49,6 +89,42 @@ export default function PostJob({
   userId,
   notify
 }: PostJobProps) {
+  const [isPostingJob, setIsPostingJob] = React.useState(false);
+  const [createPost] = useMutation(CREATE_POST, {
+    onCompleted: data => {
+      setIsPostingJob(false);
+      notify("Your post was successfully created", "success");
+    },
+    onError: err => {
+      if (err.graphQLErrors) {
+        console.log(err.graphQLErrors);
+      }
+      setIsPostingJob(false);
+      notify("Failed to create post. Please try again", "error");
+    }
+  });
+
+  const handlePostAJob = values => {
+    setIsPostingJob(true);
+    let valuesCopy = { ...values };
+    Object.keys(valuesCopy).map(
+      key => (valuesCopy[key] = valuesCopy[key] ? valuesCopy[key].value : null)
+    );
+    createPost({
+      variables: {
+        companyName: valuesCopy.companyName,
+        title: valuesCopy.title,
+        location: valuesCopy.location,
+        description: valuesCopy.description,
+        category: valuesCopy.category,
+        salary: parseInt(valuesCopy.salary),
+        currency: valuesCopy.currency,
+        type: valuesCopy.type,
+        skills: valuesCopy.skills
+      }
+    });
+  };
+
   return (
     <div>
       <Head>
@@ -61,16 +137,8 @@ export default function PostJob({
             <h1 className="title">Post a Job</h1>
             <PostaJobForm
               initialValues={initialValues}
-              onSubmit={values => {
-                let valuesCopy = { ...values };
-
-                Object.keys(valuesCopy).map(
-                  key =>
-                    (valuesCopy[key] = valuesCopy[key]
-                      ? valuesCopy[key].value
-                      : null)
-                );
-              }}
+              onSubmit={handlePostAJob}
+              postingJob={isPostingJob}
             />
           </div>
         </div>

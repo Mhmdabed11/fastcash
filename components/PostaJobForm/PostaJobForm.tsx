@@ -15,6 +15,7 @@ import Router from "next/router";
 type FormProps = {
   initialValues: object;
   onSubmit: (values: object) => void;
+  postingJob: boolean;
 };
 
 const skills = [
@@ -37,7 +38,11 @@ let years = yearsOfExperienceList.map(degree => ({
   label: degree
 }));
 
-export default function PostaJobForm({ initialValues, onSubmit }: FormProps) {
+export default function PostaJobForm({
+  initialValues,
+  onSubmit,
+  postingJob
+}: FormProps) {
   const { values, onChange, setValues, handleFormSubmit } = useFormValidation(
     initialValues,
     validationSchema
@@ -48,18 +53,17 @@ export default function PostaJobForm({ initialValues, onSubmit }: FormProps) {
   }, [initialValues]);
 
   // update user
-  const handleUpdateUser = () => {
-    console.log(values);
+  const handlePostAJob = () => {
     onSubmit(values);
   };
 
   // handle submit
   const handleSubmit = e => {
     e.preventDefault();
-    handleFormSubmit(handleUpdateUser);
+    handleFormSubmit(handlePostAJob);
   };
 
-  // handle discard changes
+  // handle discard <changes></changes>
   const handleDiscardChanges = e => {
     e.preventDefault();
     Router.push("/");
@@ -136,7 +140,7 @@ export default function PostaJobForm({ initialValues, onSubmit }: FormProps) {
             </div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="jobTitle" className="label">
+                <label htmlFor="title" className="label">
                   Job Title
                   <span title="required" className="required-astrisk">
                     *
@@ -145,11 +149,11 @@ export default function PostaJobForm({ initialValues, onSubmit }: FormProps) {
               </div>
               <div className="column">
                 <Input
-                  name="jobTitle"
-                  placeholder={"Last Name"}
-                  value={values.jobTitle ? values.jobTitle.value : ""}
+                  name="title"
+                  placeholder={"Job title"}
+                  value={values.title ? values.title.value : ""}
                   onChange={onChange}
-                  error={values.jobTitle ? values.jobTitle.errorLabel : ""}
+                  error={values.title ? values.title.errorLabel : ""}
                 />
               </div>
             </div>
@@ -183,22 +187,18 @@ export default function PostaJobForm({ initialValues, onSubmit }: FormProps) {
             </div>
             <div className="columns is-multiline">
               <div className="column  is-one-third">
-                <label htmlFor="jobDescription" className="label">
+                <label htmlFor="description" className="label">
                   Job Description
                 </label>
               </div>
               <div className="column">
                 <TextArea
-                  name="jobDescription"
+                  name="description"
                   placeholder={"Job Description"}
-                  value={
-                    values.jobDescription ? values.jobDescription.value : ""
-                  }
+                  value={values.description ? values.description.value : ""}
                   onChange={onChange}
                   error={
-                    values.jobDescription
-                      ? values.jobDescription.errorLabel
-                      : ""
+                    values.description ? values.description.errorLabel : ""
                   }
                 />
               </div>
@@ -247,6 +247,27 @@ export default function PostaJobForm({ initialValues, onSubmit }: FormProps) {
                 />
               </div>
             </div>
+            <div className="columns is-multiline">
+              <div className="column  is-one-third">
+                <label htmlFor="salary" className="label">
+                  Salary
+                  <span title="required" className="required-astrisk">
+                    *
+                  </span>
+                </label>
+              </div>
+              <div className="column">
+                <Input
+                  name="salary"
+                  placeholder={"Salary"}
+                  value={values.salary ? values.salary.value : ""}
+                  onChange={onChange}
+                  error={values.salary ? values.salary.errorLabel : ""}
+                  type="number"
+                  min="0"
+                />
+              </div>
+            </div>
             <div className="columns is-mutiline">
               <div className="column  is-one-third">
                 <label htmlFor="currency" className="label">
@@ -275,15 +296,15 @@ export default function PostaJobForm({ initialValues, onSubmit }: FormProps) {
 
             <div className="columns is-multiline">
               <div className="column is-one-third">
-                <label htmlFor="skillsRequired" className="label">
+                <label htmlFor="skills" className="label">
                   Skills
                 </label>
               </div>
               <div className="column">
                 <Select
-                  inputId="skillsRequired"
+                  inputId="skills"
                   options={skills}
-                  name="skillsRequired"
+                  name="skills"
                   value={skillsValue}
                   onChange={val => handleSelectChange(val, "skills")}
                   placeholder="Skills"
@@ -324,10 +345,10 @@ export default function PostaJobForm({ initialValues, onSubmit }: FormProps) {
 
       <hr className="postjob-form__page-break" />
       <div className="postjob-submit-btns buttons is-flex">
-        <SecondaryButton onClick={handleDiscardChanges}>
-          Discard Changes
-        </SecondaryButton>
-        <PrimaryButton disabled={hasErrors()}>Save</PrimaryButton>
+        <SecondaryButton onClick={handleDiscardChanges}>Cancel</SecondaryButton>
+        <PrimaryButton loading={postingJob} disabled={hasErrors()}>
+          Save
+        </PrimaryButton>
       </div>
     </form>
   );

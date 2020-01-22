@@ -13,6 +13,7 @@ type InputProps = {
   value: number | string;
   onChange: (e) => void;
   required?: boolean;
+  min?: string;
 };
 
 export default function Input({
@@ -25,7 +26,8 @@ export default function Input({
   error,
   value,
   onChange,
-  required = false
+  required = false,
+  min
 }: InputProps) {
   const renderLabel = () =>
     label ? (
@@ -70,6 +72,7 @@ export default function Input({
           value={value}
           onChange={onChange}
           required={required}
+          min={min}
         />
         {renderError()}
         {renderIconLeft()}
