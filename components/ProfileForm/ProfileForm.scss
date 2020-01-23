@@ -1,0 +1,46 @@
+$description-color: var(--light-gray);
+
+.profile-form__subcontainer {
+  .profile-basics {
+    .profile-basics__title {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    .profile-basics__description {
+      color: $description-color;
+      font-size: 0.8125rem;
+    }
+  }
+
+  .profile-about {
+    .profile-about__title {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    .profile-about__description {
+      color: $description-color;
+      font-size: 0.8125rem;
+    }
+  }
+
+  .label {
+    font-weight: normal;
+  }
+}
+
+.profile-form__page-break {
+  background-color: #e1e1e1;
+}
+.profile-submit-btns {
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 768px) {
+  .profile-submit-btns {
+    flex-direction: column-reverse;
+    button {
+      width: 100%;
+      margin: 0.25rem 0 !important;
+    }
+  }
+}

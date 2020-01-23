@@ -3,7 +3,7 @@ import BaseButton from "../BaseButton/BaseButton";
 const PRIMARY_COLOR = "#2062f0";
 const WHITE = "#FFFFFF";
 import { ButtonProps } from "../BaseButton/BaseButton";
-export default function PrimaryButton({
+export default function SecondaryButton({
   children,
   onClick,
   style,
@@ -14,9 +14,10 @@ export default function PrimaryButton({
       onClick={onClick}
       {...rest}
       style={{
-        backgroundColor: PRIMARY_COLOR,
-        color: WHITE,
+        backgroundColor: WHITE,
+        color: PRIMARY_COLOR,
         fontWeight: "normal",
+        borderColor: PRIMARY_COLOR,
         ...style
       }}
     >

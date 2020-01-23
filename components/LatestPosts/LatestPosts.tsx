@@ -2,7 +2,7 @@ import React from "react";
 import "./LatestPosts.scss";
 import Link from "next/link";
 import PostCard from "../shared/PostCard/PostCard";
-import { pseudoRandomBytes } from "crypto";
+import PostSkeletonLoader from "../shared/PostSkeletonLoader/PostSkeletonLoader";
 
 type Post = {
   id: string;
@@ -10,14 +10,17 @@ type Post = {
   location: string;
   description: string;
   author: object;
-  skillsRequired: string[];
+  skills: string[];
 };
 
 type LatestPostsProps = {
   postts: Array<Post> | [];
+  loading: boolean;
 };
 
-export default function LatestPosts({ posts }) {
+const skeletonMap = [1, 2];
+
+export default function LatestPosts({ posts, loading }) {
   return (
     <section className="section latestposts-section">
       <div className="container">
@@ -33,17 +36,19 @@ export default function LatestPosts({ posts }) {
             </div>
           </div>
           <div style={{ marginTop: "40px" }}>
-            {posts.map(post => (
-              <PostCard
-                key={post.id}
-                title={post.title}
-                postedBy={post.author.firstName}
-                type="Full-time"
-                description={post.description}
-                location={post.location}
-                techStack={post.skillsRequired}
-              />
-            ))}
+            {loading
+              ? skeletonMap.map(item => <PostSkeletonLoader />)
+              : posts.map(post => (
+                  <PostCard
+                    key={post.id}
+                    title={post.title}
+                    postedBy={post.author.firstName}
+                    type="Full-time"
+                    description={post.description}
+                    location={post.location}
+                    techStack={post.skills}
+                  />
+                ))}
           </div>
         </div>
       </div>

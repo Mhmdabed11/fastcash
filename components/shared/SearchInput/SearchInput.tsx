@@ -35,7 +35,7 @@ export default function SearchInput({ initialValue, onSubmit }: SearchProps) {
           <PrimaryButton
             size="medium"
             type="submit"
-            style={{ borderRadius: 0 }}
+            style={{ borderRadius: 4 }}
           >
             Search
           </PrimaryButton>

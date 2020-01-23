@@ -1,13 +1,22 @@
 import * as React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Select from "./Select";
+import Select from "../../components/shared/Select/Select";
 describe("Test BaseButton", () => {
   test("Error element renders when prop is supplied", () => {
     const { queryByTestId } = render(
       <Select
         name="country"
-        options={["Lebanon", "Canada"]}
+        options={[
+          {
+            label: "Lebanon",
+            value: "Lebanon"
+          },
+          {
+            label: "Canada",
+            value: "Canada"
+          }
+        ]}
         error="Required"
         value=""
         onChange={() => {}}
@@ -21,7 +30,16 @@ describe("Test BaseButton", () => {
       const { queryByTestId } = render(
         <Select
           name="country"
-          options={["Lebanon", "Canada"]}
+          options={[
+            {
+              label: "Lebanon",
+              value: "Lebanon"
+            },
+            {
+              label: "Canada",
+              value: "Canada"
+            }
+          ]}
           value=""
           onChange={() => {}}
           placeholder="Country"

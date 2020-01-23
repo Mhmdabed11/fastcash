@@ -10,6 +10,12 @@ import PrimaryButton from "../shared/PrimaryButton/PrimaryButton";
 import { useFormValidation } from "../../utils/hooks/useFormValidation";
 import { validationSchema } from "./validation";
 import Select from "../shared/Select/Select";
+import { countryList } from "../../utils/countries";
+
+let countries = countryList.map(country => ({
+  value: country,
+  label: country
+}));
 
 type FormProps = {
   onSubmit: (values: object) => void;
@@ -38,7 +44,7 @@ const initialValues = {
   }
 };
 export default function SignupForm({ onSubmit, submitting }: FormProps) {
-  const { values, onChange, handleFormSubmit } = useFormValidation(
+  const { values, onChange, setValues, handleFormSubmit } = useFormValidation(
     initialValues,
     validationSchema
   );
@@ -46,6 +52,11 @@ export default function SignupForm({ onSubmit, submitting }: FormProps) {
   const handleSubmit = e => {
     e.preventDefault();
     handleFormSubmit(handleSignup);
+  };
+
+  // handle select change
+  const handleSelectChange = (selectedOption, name) => {
+    setValues(currVal => ({ ...currVal, [name]: selectedOption }));
   };
 
   const handleSignup = () => {
@@ -100,12 +111,25 @@ export default function SignupForm({ onSubmit, submitting }: FormProps) {
           />
         </div>
         <div className="column is-full">
+          <label
+            style={{ visibility: "hidden", display: "none" }}
+            htmlFor="country"
+          >
+            Country
+          </label>
           <Select
-            iconLeft={faGlobe}
-            options={["Lebanon", "Canada"]}
+            options={countries}
             name="country"
-            value={values.country.value}
-            onChange={onChange}
+            inputId="country"
+            value={
+              values.country && values.country.value
+                ? {
+                    value: values.country.value,
+                    label: values.country.value
+                  }
+                : null
+            }
+            onChange={val => handleSelectChange(val, "country")}
             error={values.country.errorLabel ? values.country.errorLabel : null}
             placeholder="Country"
           />

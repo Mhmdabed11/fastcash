@@ -20,6 +20,7 @@
     "**/*.ts",
     "**/*.tsx",
     "lib/apollo.js",
-    "utils/HOC/withAuthSync.js"
+    "utils/HOC/withAuthSync.js",
+    "pages/_app.js"
   ]
 }

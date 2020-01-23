@@ -9,14 +9,13 @@ import gql from "graphql-tag";
 import { useQuery } from "react-apollo";
 type HomeProps = {
   authenticated: boolean;
-  context: any;
-  token: string;
 };
 
 const GET_LATEST_POSTS = gql`
   query getLatestPosts {
     posts(first: 5) {
       id
+      companyName
       title
       location
       description
@@ -24,13 +23,13 @@ const GET_LATEST_POSTS = gql`
         firstName
         lastName
       }
-      skillsRequired
+      skills
     }
   }
 `;
 
-const Home = ({ authenticated, context, token }: HomeProps) => {
-  const { loading, error, data } = useQuery(GET_LATEST_POSTS, {});
+const Home = ({ authenticated }: HomeProps) => {
+  const { loading, error, data } = useQuery(GET_LATEST_POSTS);
   return (
     <div>
       <Head>
@@ -39,7 +38,9 @@ const Home = ({ authenticated, context, token }: HomeProps) => {
       </Head>
       <NavBar authenticated={authenticated} />
       <HomePageSearchHeader />
-      <LatestPosts posts={(data && data.posts) || []} />;
+      {!loading && data && data.posts.length !== 0 ? (
+        <LatestPosts posts={(data && data.posts) || []} loading={loading} />
+      ) : null}
       <Footer />
     </div>
   );
@@ -48,7 +49,7 @@ const Home = ({ authenticated, context, token }: HomeProps) => {
 Home.getInitialProps = async ctx => {
   const { token } = nextCookie(ctx);
   const authenticated = token;
-  return { authenticated, token };
+  return { authenticated };
 };
 
 export default Home;

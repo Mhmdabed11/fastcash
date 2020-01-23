@@ -13,6 +13,7 @@ export const useFormValidation = (
   validationSchema: object
 ): formValidationArgs => {
   const [values, setValues] = React.useState(initialValue);
+
   const onChange = e => {
     const name = e.target.name;
     const value = e.target.value;
@@ -28,11 +29,10 @@ export const useFormValidation = (
   const handleFormSubmit = cb => {
     let newState = { ...values };
     let valid = true;
-
     for (let entry in newState) {
       const validationResult = validateInput(
         entry,
-        newState[entry].value,
+        newState[entry] ? newState[entry].value : null,
         validationSchema
       );
       newState = {
@@ -43,10 +43,10 @@ export const useFormValidation = (
         }
       };
     }
-
     valid = !Object.keys(newState).some(
       entry => newState[entry].errorLabel !== null
     );
+
     setValues(newState);
     if (valid) {
       if (cb) cb();
