@@ -59,7 +59,7 @@ describe("Test profile form", () => {
         value: "Abed"
       }
     });
-    const country = getByLabelText("Country*");
+    const country = getByLabelText("Country *");
     await selectEvent.select(country, ["Lebanon"]);
     fireEvent.change(getByPlaceholderText("Phone Number"), {
       target: {
@@ -97,7 +97,7 @@ describe("Test profile form", () => {
           value: "Abed"
         }
       });
-      const country = getByLabelText("Country*");
+      const country = getByLabelText("Country *");
       await selectEvent.select(country, ["Lebanon"]);
       fireEvent.change(getByPlaceholderText("Phone Number"), {
         target: {
@@ -135,7 +135,7 @@ describe("Test profile form", () => {
           value: "Mohammad"
         }
       });
-      const country = getByLabelText("Country*");
+      const country = getByLabelText("Country *");
       await selectEvent.select(country, ["Lebanon"]);
       fireEvent.change(getByPlaceholderText("Phone Number"), {
         target: {
@@ -221,7 +221,7 @@ describe("Test profile form", () => {
         }
       });
 
-      const country = getByLabelText("Country*");
+      const country = getByLabelText("Country *");
       await selectEvent.select(country, ["Lebanon"]);
 
       fireEvent.click(getByText(/Save/i));
