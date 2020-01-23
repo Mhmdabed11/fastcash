@@ -5,7 +5,7 @@ export const validationSchema: object = {
       message: "^Company name is required"
     }
   },
-  jobTitle: {
+  title: {
     presence: {
       allowEmpty: false,
       message: "^Job title is required"
@@ -17,7 +17,7 @@ export const validationSchema: object = {
       message: "^Location is required"
     }
   },
-  jobDescription: {
+  description: {
     presence: {
       allowEmpty: false,
       message: "^Job Description is required"
@@ -45,6 +45,16 @@ export const validationSchema: object = {
     presence: {
       allowEmpty: false,
       message: "^Employment type is required"
+    }
+  },
+  salary: {
+    presence: {
+      allowEmpty: false,
+      message: "^Salary is required"
+    },
+    numericality: {
+      greaterThan: 0,
+      message: "^Salary should be a positive number"
     }
   }
 };

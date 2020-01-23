@@ -81,17 +81,6 @@ export default function ProfileForm({
     setValues(currVal => ({ ...currVal, [name]: finalValue }));
   };
 
-  // check if there are any validation errors
-  const hasErrors = React.useCallback(() => {
-    let isError = false;
-    Object.keys(values).forEach(key => {
-      if (values[key] && values[key].errorLabel) {
-        isError = true;
-      }
-    });
-    return isError;
-  }, [values]);
-
   // console.log(values.skills);
   // skills value
   const skillsValue = React.useMemo(
@@ -121,7 +110,7 @@ export default function ProfileForm({
                 <label htmlFor="firstName" className="label">
                   First Name
                   <span title="required" className="required-astrisk">
-                    *
+                    &nbsp;*
                   </span>
                 </label>
               </div>
@@ -140,7 +129,7 @@ export default function ProfileForm({
                 <label htmlFor="lastName" className="label">
                   Last Name
                   <span title="required" className="required-astrisk">
-                    *
+                    &nbsp;*
                   </span>
                 </label>
               </div>
@@ -159,7 +148,7 @@ export default function ProfileForm({
                 <label htmlFor="country" className="label">
                   Country
                   <span title="required" className="required-astrisk">
-                    *
+                    &nbsp;*
                   </span>
                 </label>
               </div>
@@ -332,9 +321,7 @@ export default function ProfileForm({
         <SecondaryButton onClick={handleDiscardChanges}>
           Discard Changes
         </SecondaryButton>
-        <PrimaryButton disabled={hasErrors()} loading={updatingUser}>
-          Save
-        </PrimaryButton>
+        <PrimaryButton loading={updatingUser}>Save</PrimaryButton>
       </div>
     </form>
   );
