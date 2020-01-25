@@ -13,7 +13,7 @@ type HomeProps = {
 
 const GET_LATEST_POSTS = gql`
   query getLatestPosts {
-    posts(first: 5) {
+    posts(last: 5) {
       id
       companyName
       title

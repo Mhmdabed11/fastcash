@@ -17,6 +17,7 @@ type PostCardProps = {
   location: string;
   description: string;
   techStack: Array<string>;
+  company: string;
 };
 
 export default function PostCard({
@@ -26,7 +27,8 @@ export default function PostCard({
   type,
   location,
   description,
-  techStack
+  techStack,
+  company
 }: PostCardProps) {
   return (
     <div className={`postcard__container ${newPost ? "new-post" : ""}`}>
@@ -50,6 +52,9 @@ export default function PostCard({
         </div>
         <div className="postcard__container-jobmeta-item">
           <FontAwesomeIcon icon={faLocationArrow} /> {location}
+        </div>
+        <div className="postcard__container-jobmeta-item">
+          <FontAwesomeIcon icon={faBuilding} /> {company}
         </div>
       </div>
 

@@ -5,10 +5,11 @@ import Select from "../shared/Select/Select";
 import PrimaryButton from "../shared/PrimaryButton/PrimaryButton";
 import SecondaryButton from "../shared/SecondaryButton/SecondaryButton";
 import TextArea from "../shared/TextArea/TextArea";
-import PrimaryAnchor from "../shared/PrimaryAnchor/PrimaryAcnhor";
 import { useFormValidation } from "../../utils/hooks/useFormValidation";
+import { categoriesList } from "../../utils/categories";
 import { countryList } from "../../utils/countries";
-import { degreesList } from "../../utils/degrees";
+import { currenciesList } from "../../utils/currencies";
+import { typesList } from "../../utils/types";
 import { yearsOfExperienceList } from "../../utils/yearsOfExperience";
 import { validationSchema } from "./validation";
 import Router from "next/router";
@@ -23,19 +24,24 @@ const skills = [
   { label: "html", value: "html" }
 ];
 
+let categories = categoriesList.map(category => ({
+  value: category,
+  label: category
+}));
+
 let countries = countryList.map(country => ({
   value: country,
   label: country
 }));
 
-let degrees = degreesList.map(degree => ({
-  value: degree,
-  label: degree
+let currencies = currenciesList.map(currency => ({
+  value: currency,
+  label: currency
 }));
 
-let years = yearsOfExperienceList.map(degree => ({
-  value: degree,
-  label: degree
+let types = typesList.map(type => ({
+  value: type,
+  label: type
 }));
 
 export default function PostaJobForm({
@@ -80,17 +86,6 @@ export default function PostaJobForm({
     setValues(currVal => ({ ...currVal, [name]: finalValue }));
   };
 
-  // check if there are any validation errors
-  const hasErrors = React.useCallback(() => {
-    let isError = false;
-    Object.keys(values).forEach(key => {
-      if (values[key] && values[key].errorLabel) {
-        isError = true;
-      }
-    });
-    return isError;
-  }, [values]);
-
   // console.log(values.skills);
   // skills value
   const skillsValue = React.useMemo(
@@ -122,14 +117,14 @@ export default function PostaJobForm({
                 <label htmlFor="companyName" className="label">
                   Company Name
                   <span title="required" className="required-astrisk">
-                    *
+                    &nbsp;*
                   </span>
                 </label>
               </div>
               <div className="column">
                 <Input
                   name="companyName"
-                  placeholder={"First Name"}
+                  placeholder={"ex. Google"}
                   value={values.companyName ? values.companyName.value : ""}
                   onChange={onChange}
                   error={
@@ -143,14 +138,14 @@ export default function PostaJobForm({
                 <label htmlFor="title" className="label">
                   Job Title
                   <span title="required" className="required-astrisk">
-                    *
+                    &nbsp;*
                   </span>
                 </label>
               </div>
               <div className="column">
                 <Input
                   name="title"
-                  placeholder={"Job title"}
+                  placeholder={"ex. Front End Developer"}
                   value={values.title ? values.title.value : ""}
                   onChange={onChange}
                   error={values.title ? values.title.errorLabel : ""}
@@ -162,7 +157,7 @@ export default function PostaJobForm({
                 <label htmlFor="location" className="label">
                   Location
                   <span title="required" className="required-astrisk">
-                    *
+                    &nbsp;*
                   </span>
                 </label>
               </div>
@@ -179,7 +174,7 @@ export default function PostaJobForm({
                       : null
                   }
                   onChange={val => handleSelectChange(val, "location")}
-                  placeholder="Location"
+                  placeholder="ex. Germany"
                   error={values.location ? values.location.errorLabel : ""}
                   inputId="location"
                 />
@@ -189,12 +184,17 @@ export default function PostaJobForm({
               <div className="column  is-one-third">
                 <label htmlFor="description" className="label">
                   Job Description
+                  <span title="required" className="required-astrisk">
+                    &nbsp;*
+                  </span>
                 </label>
               </div>
               <div className="column">
                 <TextArea
                   name="description"
-                  placeholder={"Job Description"}
+                  placeholder={
+                    "ex. Front end developer with over 2 years of experience..."
+                  }
                   value={values.description ? values.description.value : ""}
                   onChange={onChange}
                   error={
@@ -226,11 +226,14 @@ export default function PostaJobForm({
               <div className="column  is-one-third">
                 <label htmlFor="category" className="label">
                   Category
+                  <span title="required" className="required-astrisk">
+                    &nbsp;*
+                  </span>
                 </label>
               </div>
               <div className="column">
                 <Select
-                  options={years}
+                  options={categories}
                   name="category"
                   inputId="category"
                   value={
@@ -242,7 +245,7 @@ export default function PostaJobForm({
                       : null
                   }
                   onChange={val => handleSelectChange(val, "category")}
-                  placeholder="Category"
+                  placeholder="ex. Software Engineering"
                   error={values.category ? values.category.errorLabel : ""}
                 />
               </div>
@@ -252,14 +255,14 @@ export default function PostaJobForm({
                 <label htmlFor="salary" className="label">
                   Salary
                   <span title="required" className="required-astrisk">
-                    *
+                    &nbsp;*
                   </span>
                 </label>
               </div>
               <div className="column">
                 <Input
                   name="salary"
-                  placeholder={"Salary"}
+                  placeholder={"ex. 60000"}
                   value={values.salary ? values.salary.value : ""}
                   onChange={onChange}
                   error={values.salary ? values.salary.errorLabel : ""}
@@ -272,11 +275,14 @@ export default function PostaJobForm({
               <div className="column  is-one-third">
                 <label htmlFor="currency" className="label">
                   Currency
+                  <span title="required" className="required-astrisk">
+                    &nbsp;*
+                  </span>
                 </label>
               </div>
               <div className="column">
                 <Select
-                  options={degrees}
+                  options={currencies}
                   name="currency"
                   inputId="currency"
                   value={
@@ -288,7 +294,7 @@ export default function PostaJobForm({
                       : null
                   }
                   onChange={val => handleSelectChange(val, "currency")}
-                  placeholder="Currency"
+                  placeholder="ex. USD"
                   error={values.currency ? values.currency.errorLabel : ""}
                 />
               </div>
@@ -298,6 +304,9 @@ export default function PostaJobForm({
               <div className="column is-one-third">
                 <label htmlFor="skills" className="label">
                   Skills
+                  <span title="required" className="required-astrisk">
+                    &nbsp;*
+                  </span>
                 </label>
               </div>
               <div className="column">
@@ -307,7 +316,7 @@ export default function PostaJobForm({
                   name="skills"
                   value={skillsValue}
                   onChange={val => handleSelectChange(val, "skills")}
-                  placeholder="Skills"
+                  placeholder="ex. React , HTML"
                   isMulti
                   error={values.skills ? values.skills.errorLabel : ""}
                 />
@@ -318,11 +327,14 @@ export default function PostaJobForm({
               <div className="column  is-one-third">
                 <label htmlFor="type" className="label">
                   Employment Type
+                  <span title="required" className="required-astrisk">
+                    &nbsp;*
+                  </span>
                 </label>
               </div>
               <div className="column">
                 <Select
-                  options={degrees}
+                  options={types}
                   name="type"
                   inputId="type"
                   value={
@@ -334,7 +346,7 @@ export default function PostaJobForm({
                       : null
                   }
                   onChange={val => handleSelectChange(val, "type")}
-                  placeholder="Employment Type"
+                  placeholder="ex. Full Time"
                   error={values.type ? values.type.errorLabel : ""}
                 />
               </div>
@@ -346,9 +358,7 @@ export default function PostaJobForm({
       <hr className="postjob-form__page-break" />
       <div className="postjob-submit-btns buttons is-flex">
         <SecondaryButton onClick={handleDiscardChanges}>Cancel</SecondaryButton>
-        <PrimaryButton loading={postingJob} disabled={hasErrors()}>
-          Save
-        </PrimaryButton>
+        <PrimaryButton loading={postingJob}>Save</PrimaryButton>
       </div>
     </form>
   );

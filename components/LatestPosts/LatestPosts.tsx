@@ -47,6 +47,7 @@ export default function LatestPosts({ posts, loading }) {
                     description={post.description}
                     location={post.location}
                     techStack={post.skills}
+                    company={post.companyName}
                   />
                 ))}
           </div>

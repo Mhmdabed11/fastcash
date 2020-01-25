@@ -6,10 +6,10 @@ import Footer from "../../components/shared/Footer/Footer";
 var jwtDecode = require("jwt-decode");
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import Loading from "../../components/shared/Loading/Loading";
 import { withAuthSync } from "../../utils/HOC/withAuthSync";
 import "./postJob.scss";
 import PostaJobForm from "../../components/PostaJobForm/PostaJobForm";
+import Router from "next/router";
 
 type PostJobProps = {
   authenticated: boolean;
@@ -84,16 +84,13 @@ const initialValues = {
   }
 };
 
-export default function PostJob({
-  authenticated,
-  userId,
-  notify
-}: PostJobProps) {
+function PostJob({ authenticated, userId, notify }: PostJobProps) {
   const [isPostingJob, setIsPostingJob] = React.useState(false);
   const [createPost] = useMutation(CREATE_POST, {
     onCompleted: data => {
       setIsPostingJob(false);
       notify("Your post was successfully created", "success");
+      Router.push("/");
     },
     onError: err => {
       if (err.graphQLErrors) {
@@ -154,3 +151,5 @@ PostJob.getInitialProps = async ctx => {
   const payload = jwtDecode(token);
   return { authenticated, userId: payload.userId };
 };
+
+export default withAuthSync(PostJob);
