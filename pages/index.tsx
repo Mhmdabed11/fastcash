@@ -4,9 +4,10 @@ import NavBar from "../components/shared/NavBar/NavBar";
 import nextCookie from "next-cookies";
 import Footer from "../components/shared/Footer/Footer";
 import HomePageSearchHeader from "../components/HomePageSearchHeader/HomePageSearchHeader";
-import LatestPosts from "../components/LatestPosts/LatestPosts";
+import PostsList from "../components/PostsList/PostsList";
 import gql from "graphql-tag";
 import { useQuery } from "react-apollo";
+import Router from "next/router";
 type HomeProps = {
   authenticated: boolean;
 };
@@ -29,6 +30,9 @@ const GET_LATEST_POSTS = gql`
 `;
 
 const Home = ({ authenticated }: HomeProps) => {
+  const handleSearchSubmit = values =>
+    Router.push(`/search?q=${values.searchTerm}&location=${values.location}`);
+
   const { loading, error, data } = useQuery(GET_LATEST_POSTS);
   return (
     <div>
@@ -37,10 +41,18 @@ const Home = ({ authenticated }: HomeProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar authenticated={authenticated} />
-      <HomePageSearchHeader />
-      {!loading && data && data.posts.length !== 0 ? (
-        <LatestPosts posts={(data && data.posts) || []} loading={loading} />
-      ) : null}
+      <HomePageSearchHeader onSubmit={handleSearchSubmit} />
+      <section className="section">
+        <div className="container">
+          {!loading && data && data.posts.length !== 0 ? (
+            <PostsList
+              posts={(data && data.posts) || []}
+              loading={loading}
+              title={"Latest Jobs"}
+            />
+          ) : null}
+        </div>
+      </section>
       <Footer />
     </div>
   );

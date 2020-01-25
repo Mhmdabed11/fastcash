@@ -1,0 +1,25 @@
+.postsList__container {
+  max-width: 800px;
+  margin: 0 auto;
+  .postsList-header {
+    align-items: flex-end;
+    justify-content: space-between;
+
+    .title {
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .postsList-header {
+    align-items: flex-end;
+    justify-content: space-between;
+
+    .title {
+      font-weight: 700;
+      font-size: 1.375rem;
+    }
+  }
+}
