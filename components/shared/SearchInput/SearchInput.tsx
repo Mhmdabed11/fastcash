@@ -1,7 +1,9 @@
 import * as React from "react";
 import "./SearchInput.scss";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
-
+import { faFilter, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modal from "../Modal/Modal";
 type SearchProps = {
   initialValue?: string;
   initialLocation?: string;
@@ -66,12 +68,18 @@ export default function SearchInput({
           <PrimaryButton
             size="medium"
             type="submit"
-            style={{ borderRadius: 4 }}
+            style={{
+              borderRadius: 0,
+              height: "100%",
+              border: "none"
+            }}
           >
-            Search
+            <FontAwesomeIcon icon={faSearch} />
           </PrimaryButton>
         </div>
       </div>
+      <div className="search-input__moreFilters">More Filters</div>
+      {/* <Modal /> */}
     </form>
   );
 }

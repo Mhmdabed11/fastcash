@@ -1,7 +1,6 @@
 import React from "react";
 import "./SearchPageHeader.scss";
 import SearchInput from "../shared/SearchInput/SearchInput";
-import PrimaryButton from "../shared/PrimaryButton/PrimaryButton";
 export default function SearchPageHeader({
   onSubmit,
   initialValue,

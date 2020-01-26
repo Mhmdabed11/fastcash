@@ -33,7 +33,9 @@ const Home = ({ authenticated }: HomeProps) => {
   const handleSearchSubmit = values =>
     Router.push(`/search?q=${values.searchTerm}&location=${values.location}`);
 
-  const { loading, error, data } = useQuery(GET_LATEST_POSTS);
+  const { loading, error, data } = useQuery(GET_LATEST_POSTS, {
+    fetchPolicy: "network-only"
+  });
   return (
     <div>
       <Head>
@@ -44,13 +46,11 @@ const Home = ({ authenticated }: HomeProps) => {
       <HomePageSearchHeader onSubmit={handleSearchSubmit} />
       <section className="section">
         <div className="container">
-          {!loading && data && data.posts.length !== 0 ? (
-            <PostsList
-              posts={(data && data.posts) || []}
-              loading={loading}
-              title={"Latest Jobs"}
-            />
-          ) : null}
+          <PostsList
+            posts={(data && data.posts) || []}
+            loading={loading}
+            title={"Latest Jobs"}
+          />
         </div>
       </section>
       <Footer />

@@ -32,7 +32,6 @@ const SEARCH_POSTS = gql`
 
 type SearchProps = {
   authenticated: boolean;
-  userId: string;
 };
 
 const Search = ({ authenticated, userId, query }) => {
@@ -76,8 +75,7 @@ const Search = ({ authenticated, userId, query }) => {
 Search.getInitialProps = async (ctx: NextPageContext) => {
   const { token } = nextCookie(ctx);
   const authenticated = token;
-  const payload = jwtDecode(token);
-  return { authenticated, userId: payload.userId, query: ctx.query };
+  return { authenticated, query: ctx.query };
 };
 
 export default Search;

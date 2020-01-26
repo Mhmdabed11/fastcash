@@ -3,6 +3,7 @@ import "./PostsList.scss";
 import Link from "next/link";
 import PostCard from "../shared/PostCard/PostCard";
 import PostSkeletonLoader from "../shared/PostSkeletonLoader/PostSkeletonLoader";
+import NoResultsFound from "../shared/NoResultsFound/NoResultsFound";
 
 type Post = {
   id: string;
@@ -28,8 +29,13 @@ type PostsListProps = {
 const skeletonMap = [1, 2];
 
 export default function PostsList({ posts, loading, title }: PostsListProps) {
-  return (
-    <div className="postsList__container">
+  console.log("hello");
+  // render header of not found results
+  const renderHeader = React.useCallback(() => {
+    if (!loading && posts.length === 0) {
+      return null;
+    }
+    return (
       <div className="is-flex postsList-header">
         <div>
           <h1 className="title">{title}</h1>
@@ -40,22 +46,38 @@ export default function PostsList({ posts, loading, title }: PostsListProps) {
           </Link>
         </div>
       </div>
-      <div style={{ marginTop: "40px" }}>
-        {loading
-          ? skeletonMap.map((item, index) => <PostSkeletonLoader key={index} />)
-          : posts.map((post: Post) => (
-              <PostCard
-                key={post.id}
-                title={post.title}
-                postedBy={post.author.firstName}
-                type="Full-time"
-                description={post.description}
-                location={post.location}
-                techStack={post.skills}
-                company={post.companyName}
-              />
-            ))}
-      </div>
+    );
+  }, [loading, posts]);
+
+  // render body of not found results
+  const renderBody = React.useCallback(() => {
+    if (!loading && posts.length === 0) {
+      return <NoResultsFound />;
+    }
+    if (loading) {
+      return skeletonMap.map((item, index) => (
+        <PostSkeletonLoader key={index} />
+      ));
+    } else {
+      return posts.map((post: Post) => (
+        <PostCard
+          key={post.id}
+          title={post.title}
+          postedBy={post.author.firstName}
+          type="Full-time"
+          description={post.description}
+          location={post.location}
+          techStack={post.skills}
+          company={post.companyName}
+        />
+      ));
+    }
+  }, [loading, posts]);
+
+  return (
+    <div className="postsList__container">
+      {renderHeader()}
+      <div style={{ marginTop: "40px" }}>{renderBody()}</div>
     </div>
   );
 }

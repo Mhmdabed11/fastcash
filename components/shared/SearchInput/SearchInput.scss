@@ -19,6 +19,11 @@
     }
     flex: 1;
     position: relative;
+    &:nth-child(2) {
+      input {
+        border-right: none !important;
+      }
+    }
     &:after {
       content: "";
       display: block;
@@ -43,11 +48,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 6.5px;
     background-color: white;
   }
 }
-
+.search-input__moreFilters {
+  font-size: 0.875rem;
+  padding: 5px 0;
+  color: var(--link-color);
+  cursor: pointer;
+  &:hover {
+    color: gray;
+  }
+}
 @media only screen and (max-width: 768px) {
   .search-input {
     height: auto;
