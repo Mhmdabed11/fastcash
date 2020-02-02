@@ -58,7 +58,9 @@ export default function PostCard({
         </div>
       </div>
 
-      <div className="postcard__container-description">{description}</div>
+      <div className="postcard__container-description">
+        {description.substring(0, 200)}...
+      </div>
       <div className="postcard__container-techtags">
         {techStack.map((techItem, index) => (
           <div key={index} className="postcard__container-techtag">

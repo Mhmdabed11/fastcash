@@ -135,7 +135,6 @@ function Profile({ authenticated, userId, notify }: ProfileProps) {
         <div className="container">
           <div className="profile__container">
             <h1 className="title">Account Settings</h1>
-
             <ProfileForm
               initialValues={values}
               onSubmit={handleUpdateUser}

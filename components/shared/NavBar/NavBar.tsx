@@ -102,7 +102,7 @@ export default function NavBar({ authenticated }: NavBarProps) {
           className={`navbar-menu ${isActive ? "is-active" : ""}`}
         >
           <div className="navbar-start">
-            <Link href="/">
+            <Link href="/search">
               <a className="navbar-item">
                 <FontAwesomeIcon icon={faSearch} /> &nbsp; Search for a job
               </a>

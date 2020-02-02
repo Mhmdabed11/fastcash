@@ -35,7 +35,7 @@ const authLink = setContext((_, { headers }) => {
 
 // //http
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000", // Server URL (must be absolute)
+  uri: "http://35.180.133.194:4000", // Server URL (must be absolute)
   credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
   fetch
 });
@@ -44,7 +44,7 @@ export default withApollo(
   ({ ctx, headers, initialState }) =>
     new ApolloClient({
       // link: authLink.concat(httpLink),
-      uri: "http://localhost:4000",
+      uri: "http://35.180.133.194:4000",
       request: operation => {
         // const token = localStorage.getItem("token");
         // const { token } = nextCookie(ctx);
