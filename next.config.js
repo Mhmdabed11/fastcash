@@ -4,5 +4,9 @@ const withCSS = require("@zeit/next-css");
 module.exports = withCSS(
   withSass({
     /* config options here */
+    env: {
+      hostName: "http://localhost:3000",
+      graphqlEndpoint: "http://localhost:4000"
+    }
   })
 );

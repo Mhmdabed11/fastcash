@@ -29,14 +29,9 @@ function Login() {
       Router.replace("/");
     },
     onError: err => {
-      if (
-        err &&
-        err.graphQLErrors &&
-        Array.isArray(err.graphQLErrors) &&
-        err.graphQLErrors[0]
-      ) {
+      if (err && err.graphQLErrors && Array.isArray(err.graphQLErrors) && err.graphQLErrors[0]) {
         setIsLoggingIn(false);
-        setError(err.graphQLErrors[0].message.split(":")[1]);
+        setError(err.graphQLErrors[0].message);
       }
     }
   });
@@ -64,7 +59,7 @@ function Login() {
       <div className="container">
         <div className="login">
           <div className="has-text-centered">
-            <a href="http://localhost:3000">
+            <a href={process.env.hostName}>
               <img src="./fastcashlogo.svg" alt="fastcash_logo" />
             </a>
           </div>

@@ -6,7 +6,6 @@ import SignupForm from "../../components/SignUpForm/SignupForm";
 import Message from "../../components/shared/Message/Message";
 import Router from "next/router";
 import Link from "next/link";
-import nextCookie from "next-cookies";
 
 export const SIGNUP_MUTATION = gql`
   mutation UserMutation(
@@ -48,7 +47,7 @@ function Register(props) {
     onError: err => {
       setIsSubmitting(false);
       let errors = [];
-      err.graphQLErrors.forEach(err => errors.push(err.message.split(":")[1]));
+      err.graphQLErrors.forEach(err => errors.push(err.message));
       setError(errors);
     }
   });
@@ -60,19 +59,10 @@ function Register(props) {
 
   // render error messages
   const renderErrorMessages = () => {
-    return error.map((err, index) => (
-      <Message key={index} type="danger" message={err} />
-    ));
+    return error.map((err, index) => <Message key={index} type="danger" message={err} />);
   };
 
-  const handleSubmit = ({
-    firstName,
-    lastName,
-    email,
-    country,
-    password,
-    confirmPassword
-  }) => {
+  const handleSubmit = ({ firstName, lastName, email, country, password, confirmPassword }) => {
     if (password !== confirmPassword) {
       setError(["Passwords do not match"]);
       return;
@@ -94,7 +84,7 @@ function Register(props) {
       <div className="container">
         <div className="register">
           <div className="has-text-centered">
-            <a href="http://localhost:3000">
+            <a href={process.env.hostName}>
               <img src="./fastcashlogo.svg" alt="fastcash_logo" />
             </a>
           </div>

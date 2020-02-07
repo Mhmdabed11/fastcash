@@ -1,10 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
-import {
-  faSearch,
-  faShoppingBag,
-  faUser
-} from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faShoppingBag, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PrimaryAnchor from "../PrimaryAnchor/PrimaryAcnhor";
 import LightAnchor from "../LighAnchor/LighAnchor";
@@ -34,10 +30,7 @@ export default function NavBar({ authenticated }: NavBarProps) {
             <FontAwesomeIcon icon={faShoppingBag} /> &nbsp; Post a job
           </a>
         </Link>
-        <div
-          className="navbar-item has-dropdown is-hoverable"
-          data-testid="profileAuthSection"
-        >
+        <div className="navbar-item has-dropdown is-hoverable" data-testid="profileAuthSection">
           <a className="navbar-link is-arrowless">
             <FontAwesomeIcon icon={faUser} /> &nbsp; Mohammad Abed
           </a>
@@ -79,7 +72,7 @@ export default function NavBar({ authenticated }: NavBarProps) {
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="http://localhost:3000">
+          <a className="navbar-item" href={process.env.hostName}>
             <img src="./fastcashlogo.svg" />
           </a>
 
@@ -97,10 +90,7 @@ export default function NavBar({ authenticated }: NavBarProps) {
           </a>
         </div>
 
-        <div
-          id="navbar"
-          className={`navbar-menu ${isActive ? "is-active" : ""}`}
-        >
+        <div id="navbar" className={`navbar-menu ${isActive ? "is-active" : ""}`}>
           <div className="navbar-start">
             <Link href="/search">
               <a className="navbar-item">

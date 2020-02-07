@@ -4,6 +4,7 @@ import PrimaryButton from "../../../components/shared/PrimaryButton/PrimaryButto
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import Message from "../../../components/shared/Message/Message";
+import Link from "next/link";
 
 type VerifyProps = {
   email: string;
@@ -57,29 +58,27 @@ export default function Verify({ email }: VerifyProps) {
   };
 
   // render error message
-  const renderErrorMessage = () =>
-    error ? <Message type="danger" message={error} /> : null;
+  const renderErrorMessage = () => (error ? <Message type="danger" message={error} /> : null);
 
   return (
     <section className="verify-section">
       <div className="container">
         <div className="verify">
           <div className="has-text-centered">
-            <img src="/fastcashlogo.svg" alt="fastcash_logo" />
+            <Link href="/">
+              <a>
+                <img src="/fastcashlogo.svg" alt="fastcash_logo" />
+              </a>
+            </Link>
           </div>
           <div className="verify__container has-background-white">
             {renderSuccessMessage()}
             {renderErrorMessage()}
-            <div className="verify__container-heading has-text-centered">
-              Just one more step...
-            </div>
-            <div className="verify__container-email has-text-centered">
-              {email}
-            </div>
+            <div className="verify__container-heading has-text-centered">Just one more step...</div>
+            <div className="verify__container-email has-text-centered">{email}</div>
             <div className="verify__container-instruction has-text-centered">
-              We have Sent you an email to activate your account. If you do not
-              recieve an activation email within <strong>1 minute</strong>,
-              please click the button below.
+              We have Sent you an email to activate your account. If you do not recieve an
+              activation email within <strong>1 minute</strong>, please click the button below.
             </div>
             <div className="verify__container-activate-btn has-text-centered">
               <PrimaryButton
