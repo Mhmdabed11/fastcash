@@ -5,8 +5,8 @@ module.exports = withCSS(
   withSass({
     /* config options here */
     env: {
-      hostName: "http://localhost:3000",
-      graphqlEndpoint: "http://localhost:4000"
+      hostName: "http://15.188.8.145:3000",
+      graphqlEndpoint: "http://35.180.58.9:4000"
     }
   })
 );
