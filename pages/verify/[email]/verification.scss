@@ -1,0 +1,18 @@
+.success-section {
+  margin-top: 50px;
+  .success {
+    .success__container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 40px 65px;
+
+      .success__container-message {
+        font-size: 1.25rem;
+        margin-top: 24px;
+      }
+      .success__container-login-btn {
+        margin-top: 50px;
+      }
+    }
+  }
+}

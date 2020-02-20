@@ -15,5 +15,12 @@
     "jsx": "preserve"
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "lib/apollo.js",
+    "utils/HOC/withAuthSync.js",
+    "pages/_app.js"
+  ]
 }

@@ -1,0 +1,68 @@
+$text-color: #555555;
+.postcard__container {
+  margin-bottom: 30px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  .postcard__container-title {
+    color: $text-color;
+    font-size: 1.625rem;
+    &:hover {
+      a {
+        text-decoration: underline;
+      }
+    }
+    &:focus {
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+  .postcard__container-description {
+    margin-top: 16px;
+    font-size: 0.875rem;
+    color: var(--light-gray);
+  }
+  .postcard__container-jobmeta {
+    flex-wrap: wrap;
+    margin-top: 15px;
+    .postcard__container-jobmeta-item {
+      margin-bottom: 10px;
+      margin-right: 25px;
+      font-size: 0.875rem;
+      color: $text-color;
+      margin-left: 0px;
+      margin-top: 0px;
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+  .postcard__container-techtags {
+    margin-top: 20px;
+    .postcard__container-techtag {
+      background-color: #d6d3d3;
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      margin: 10px;
+      margin-left: 0px;
+      margin-top: 0px;
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+}
+
+.new-post {
+  border-left: 3px solid var(--theme-color-1) !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  .postcard__container {
+    .postcard__container-title {
+      font-size: 1.275rem;
+    }
+  }
+}

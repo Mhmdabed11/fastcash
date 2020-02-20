@@ -1,12 +1,29 @@
-.register {
-  .register__container {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 24px;
+$margin-top-from-logo: var(--margin-top-from-logo);
+.register-section {
+  margin-top: 50px;
+  .register {
+    .register__container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px;
+      margin-top: $margin-top-from-logo;
 
-    .register__container__title {
-      font-weight: 700;
-      font-size: 1.5rem;
+      .register__container-title {
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+      .register__container-controls {
+        margin-top: 30px;
+      }
+      .register__container-sign-in {
+        margin-top: 40px;
+        a {
+          font-weight: 500;
+        }
+      }
+      hr {
+        margin: 40px 0;
+      }
     }
   }
 }

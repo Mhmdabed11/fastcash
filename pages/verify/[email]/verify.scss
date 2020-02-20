@@ -1,0 +1,31 @@
+$instruction-text-color: var(--light-gray);
+$margin-top-from-logo: var(--margin-top-from-logo);
+.verify-section {
+  margin-top: 50px;
+  .verify {
+    .verify__container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 40px 65px;
+      margin-top: $margin-top-from-logo;
+      .verify__container-heading {
+        font-size: 2.25rem;
+        font-weight: 700;
+      }
+      .verify__container-email {
+        font-size: 0.875rem;
+        font-weight: 700;
+        margin-top: 24px;
+      }
+      .verify__container-instruction {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-top: 24px;
+        color: $instruction-text-color;
+      }
+      .verify__container-activate-btn {
+        margin-top: 50px;
+      }
+    }
+  }
+}
