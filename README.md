@@ -1,7 +1,7 @@
 # fastcash
 
 Fastcash is a web applicaiton which allow users to post and find jobs online worldwide.
-The app is still in its ***early stages and under development***, so you wil find inconsistencies.
+The app is still in its ***early stages and under development***, so you will find bugs and inconsistencies.
 The technologies used for this project are:
  - `Nextjs` as a React framework for SSR
  - `Apollo client` as a graphql client
