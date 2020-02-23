@@ -1,14 +1,20 @@
 import * as React from "react";
 import Link from "next/link";
-import { faSearch, faShoppingBag, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PrimaryAnchor from "../PrimaryAnchor/PrimaryAcnhor";
 import LightAnchor from "../LighAnchor/LighAnchor";
 import { logout } from "../../../utils/helpers/auth";
+import cookie from "js-cookie";
+import "./NavBar.scss";
 
 type NavBarProps = {
   authenticated: boolean;
 };
+
+const firstName = cookie.get("firstName");
+const lastName = cookie.get("lastName");
+const profilePicture = cookie.get("profilePicture");
 
 export default function NavBar({ authenticated }: NavBarProps) {
   const [isActive, setIsActive] = React.useState(false);
@@ -30,9 +36,19 @@ export default function NavBar({ authenticated }: NavBarProps) {
             <FontAwesomeIcon icon={faShoppingBag} /> &nbsp; Post a job
           </a>
         </Link>
-        <div className="navbar-item has-dropdown is-hoverable" data-testid="profileAuthSection">
+        <div
+          className="navbar-item has-dropdown is-hoverable"
+          data-testid="profileAuthSection"
+        >
           <a className="navbar-link is-arrowless">
-            <FontAwesomeIcon icon={faUser} /> &nbsp; Mohammad Abed
+            {profilePicture && (
+              <img
+                className="navbar-profile-picture"
+                src={profilePicture}
+                alt={firstName}
+              />
+            )}
+            &nbsp; {firstName} {lastName}
           </a>
           <div className="navbar-dropdown">
             <Link href="/profile">
@@ -90,7 +106,10 @@ export default function NavBar({ authenticated }: NavBarProps) {
           </a>
         </div>
 
-        <div id="navbar" className={`navbar-menu ${isActive ? "is-active" : ""}`}>
+        <div
+          id="navbar"
+          className={`navbar-menu ${isActive ? "is-active" : ""}`}
+        >
           <div className="navbar-start">
             <Link href="/search">
               <a className="navbar-item">

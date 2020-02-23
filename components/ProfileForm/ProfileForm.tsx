@@ -5,10 +5,10 @@ import Select from "../shared/Select/Select";
 import PrimaryButton from "../shared/PrimaryButton/PrimaryButton";
 import SecondaryButton from "../shared/SecondaryButton/SecondaryButton";
 import TextArea from "../shared/TextArea/TextArea";
-import PrimaryAnchor from "../shared/PrimaryAnchor/PrimaryAcnhor";
 import { useFormValidation } from "../../utils/hooks/useFormValidation";
 import { countryList } from "../../utils/countries";
 import { degreesList } from "../../utils/degrees";
+import { skillsList } from "../../utils/skills";
 import { yearsOfExperienceList } from "../../utils/yearsOfExperience";
 import { validationSchema } from "./validation";
 import Router from "next/router";
@@ -18,10 +18,10 @@ type FormProps = {
   updatingUser: boolean;
 };
 
-const skills = [
-  { value: "React", label: "React" },
-  { label: "html", value: "html" }
-];
+let skills = skillsList.map(skill => ({
+  value: skill,
+  label: skill
+}));
 
 let countries = countryList.map(country => ({
   value: country,
@@ -59,7 +59,6 @@ export default function ProfileForm({
 
   // handle submit
   const handleSubmit = e => {
-    console.log(values);
     e.preventDefault();
     handleFormSubmit(handleUpdateUser);
   };
@@ -181,17 +180,11 @@ export default function ProfileForm({
                 <Input
                   name="phoneNumber"
                   placeholder={"Phone Number"}
-                  value={values.phoneNumber ? values.phoneNumber.value : ""}
+                  value={
+                    values.phoneNumber ? values.phoneNumber.value || "" : ""
+                  }
                   onChange={onChange}
                 />
-              </div>
-            </div>
-            <div className="columns is-multiline">
-              <div className="column  is-one-third">
-                <label className="label">Password</label>
-              </div>
-              <div className="column">
-                <PrimaryAnchor to="/profile">Change Password</PrimaryAnchor>
               </div>
             </div>
           </div>
@@ -274,7 +267,7 @@ export default function ProfileForm({
                 <Input
                   name="headline"
                   placeholder={"Headline"}
-                  value={values.headline ? values.headline.value : ""}
+                  value={values.headline ? values.headline.value || "" : ""}
                   onChange={onChange}
                 />
               </div>
@@ -305,7 +298,7 @@ export default function ProfileForm({
               </div>
               <div className="column">
                 <TextArea
-                  value={values.about ? values.about.value : ""}
+                  value={values.about ? values.about.value || "" : ""}
                   placeholder="About"
                   name="about"
                   onChange={onChange}
@@ -318,7 +311,7 @@ export default function ProfileForm({
 
       <hr className="profile-form__page-break" />
       <div className="profile-submit-btns buttons is-flex">
-        <SecondaryButton onClick={handleDiscardChanges}>
+        <SecondaryButton type="button" onClick={handleDiscardChanges}>
           Discard Changes
         </SecondaryButton>
         <PrimaryButton loading={updatingUser}>Save</PrimaryButton>

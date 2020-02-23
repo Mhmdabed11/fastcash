@@ -10,6 +10,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Loading from "../../components/shared/Loading/Loading";
 import { withAuthSync } from "../../utils/HOC/withAuthSync";
+import cookie from "js-cookie";
 
 type ProfileProps = {
   authenticated: boolean;
@@ -77,6 +78,8 @@ function Profile({ authenticated, userId, notify }: ProfileProps) {
   const [updateUser] = useMutation(UPDATE_USER, {
     onCompleted: data => {
       setIsUpdatingUser(false);
+      cookie.set("firstName", data.updateUser.firstName);
+      cookie.set("lastName", data.updateUser.lastName);
       notify("Saved Successfully", "success");
     },
     onError: err => {

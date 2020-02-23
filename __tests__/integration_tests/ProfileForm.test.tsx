@@ -71,7 +71,7 @@ describe("Test profile form", () => {
     const degreeAchieved = getByLabelText("Degree Achieved");
     await selectEvent.select(degreeAchieved, ["Bachelor's"]);
     const skills = getByLabelText("Skills");
-    await selectEvent.select(skills, ["html", "React"]);
+    await selectEvent.select(skills, ["HTML", "React"]);
     fireEvent.change(getByPlaceholderText("About"), {
       target: {
         value:
@@ -109,7 +109,7 @@ describe("Test profile form", () => {
       const degreeAchieved = getByLabelText("Degree Achieved");
       await selectEvent.select(degreeAchieved, ["Bachelor's"]);
       const skills = getByLabelText("Skills");
-      await selectEvent.select(skills, ["html", "React"]);
+      await selectEvent.select(skills, ["HTML", "React"]);
       fireEvent.change(getByPlaceholderText("About"), {
         target: {
           value:
@@ -147,7 +147,7 @@ describe("Test profile form", () => {
       const degreeAchieved = getByLabelText("Degree Achieved");
       await selectEvent.select(degreeAchieved, ["Bachelor's"]);
       const skills = getByLabelText("Skills");
-      await selectEvent.select(skills, ["html", "React"]);
+      await selectEvent.select(skills, ["HTML", "React"]);
       fireEvent.change(getByPlaceholderText("About"), {
         target: {
           value:
@@ -189,7 +189,7 @@ describe("Test profile form", () => {
       const degreeAchieved = getByLabelText("Degree Achieved");
       await selectEvent.select(degreeAchieved, ["Bachelor's"]);
       const skills = getByLabelText("Skills");
-      await selectEvent.select(skills, ["html", "React"]);
+      await selectEvent.select(skills, ["HTML", "React"]);
       fireEvent.change(getByPlaceholderText("About"), {
         target: {
           value:

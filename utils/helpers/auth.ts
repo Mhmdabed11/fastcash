@@ -19,6 +19,9 @@ export const auth = ctx => {
 
 export const logout = () => {
   cookie.remove("token");
+  cookie.remove("firstName");
+  cookie.remove("lastName");
+  cookie.remove("profilePicture");
   // To trigger the event listener we save some random data into the `logout` key
   const date = Date.now();
   window.localStorage.setItem("logout", date.toString()); // new
