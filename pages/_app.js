@@ -7,10 +7,11 @@ import withApollo from "../lib/withApollo";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 import Router from "next/router";
 // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 config.autoAddCss = false;
-
+library.add(fab);
 // notify function
 function notify(message, type, position = toast.POSITION.TOP_CENTER) {
   toast(message, { type, position });

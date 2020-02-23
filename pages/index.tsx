@@ -11,7 +11,7 @@ import Router from "next/router";
 type HomeProps = {
   authenticated: boolean;
 };
-
+import cookie from "js-cookie";
 const GET_LATEST_POSTS = gql`
   query getLatestPosts {
     posts(last: 5) {

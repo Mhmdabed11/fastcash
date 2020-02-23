@@ -1,0 +1,20 @@
+.facebook-login-btn {
+  height: 40px;
+  background-color: #1877f2;
+  color: #f0ffff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
+  padding: 10px 16px;
+  border-radius: 4px;
+  display: block;
+  text-align: center;
+  margin: 0.75rem 0;
+  span {
+    margin-left: 10px;
+  }
+  &:hover {
+    background-color: white;
+    border: 1px solid #1877f2;
+    color: #1877f2;
+  }
+}
