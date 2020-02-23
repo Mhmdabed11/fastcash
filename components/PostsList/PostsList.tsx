@@ -29,7 +29,6 @@ type PostsListProps = {
 const skeletonMap = [1, 2];
 
 export default function PostsList({ posts, loading, title }: PostsListProps) {
-  console.log("hello");
   // render header of not found results
   const renderHeader = React.useCallback(() => {
     if (!loading && posts.length === 0) {
